@@ -1,0 +1,109 @@
+# Generic check event – must_inherit parent for all rolls / tests
+allOf:
+  - $ref: ./base_event.yaml
+  - type: object
+    required: [event_type, check]
+    properties:
+      event_type:
+        const: system.check
+      check:
+        type: object
+        required: [kind, difficulty, pool, result]
+        properties:
+          kind:
+            type: string
+            description: |
+              Logical type of check, e.g. "attack", "resist", "skill", "save".
+              This is system-agnostic; system adapters map it to mechanics.
+          skill:
+            type: string
+            description: |
+              High-level skill / competency invoked (Acrobatics, Firearms, Etiquette).
+          trait:
+            type: string
+            description: |
+              Attribute / trait used (Strength, Willpower, Cool).
+          targets:
+            type: array
+            items:
+              type: string
+            description: One or more ids of things being affected
+          difficulty:
+            type: object
+            properties:
+              label:
+                type: string
+                description: |
+                  Human-facing difficulty label ("Easy", "Hard 3 successes", etc.).
+              value:
+                type: number
+                description: |
+                  Normalized target number / threshold / TN / DC / successes.
+              scale:
+                type: string
+                description: |
+                  Free text for adapter ("d20", "successes", "margin").
+          pool:
+            type: object
+            properties:
+              dice:
+                type: string
+                description: |
+                  System-facing representation of the pool, e.g. "1d20+7" or "10d6".
+              size:
+                type: integer
+                description: Number of dice in a dice-pool system (Shadowrun, WoD).
+              static_bonus:
+                type: number
+                description: Non-dice flat bonuses.
+              source_breakdown:
+                type: array
+                description: |
+                  Optional detailed breakdown; illustrative, not exhaustive.
+                items:
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                    value:
+                      type: number
+          modifiers:
+            type: object
+            description: |
+              Bag for system-specific flags and adjustments (all optional).
+            properties:
+              advantage_state:
+                type: string
+                enum: [normal, advantage, disadvantage]
+                description: |
+                  Only used by systems that support this concept.
+              situational:
+                type: array
+                items:
+                  type: string
+                description: Human-readable situational modifiers.
+              flags:
+                type: array
+                items:
+                  type: string
+                description: |
+                  Adapter hooks, e.g. "cover", "flanking"; illustrative only.
+          result:
+            type: object
+            required: [success]
+            properties:
+              rolled:
+                type: number
+                description: Raw rolled value, or total post-modifiers.
+              successes:
+                type: integer
+                description: Number of successes in dice-pool systems.
+              success:
+                type: boolean
+                description: Overall pass/fail after system resolution.
+              margin:
+                type: number
+                description: Positive for success margin, negative for failure.
+          note:
+            type: string
+            description: GM-facing extra info for this check.

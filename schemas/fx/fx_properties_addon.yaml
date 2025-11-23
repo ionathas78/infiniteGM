@@ -1,0 +1,65 @@
+# Add-on template for items, abilities, or effects with special / magical powers
+type: object
+title: fx_properties_addon
+properties:
+  fx_level:
+    type: integer
+    description: |
+      Overall power tier of the effect within the setting.
+      Scale is system-specific; adapters interpret it.
+  school:
+    type: string
+    description: Describes the "school" or flavor (Evocation, Biomancy, Psionic).
+  domains:
+    type: array
+    items:
+      type: string
+    description: |
+      Broad narrative domains (fire, fear, ward, time).
+  source:
+    type: string
+    description: |
+      Who or what granted / created this effect (deity, ritual, artifact).
+  triggers:
+    type: array
+    items:
+      type: object
+      properties:
+        mode:
+          type: string
+          description: |
+            Type of trigger ("command-word", "gesture", "blood", "proximity").
+        definition:
+          type: string
+          description: |
+            Concrete details, e.g. the actual command word or gesture.
+        cost:
+          type: string
+          description: Narrative cost ("exhaustion", "HP", "charge").
+  charges:
+    type: object
+    properties:
+      max:
+        type: integer
+      current:
+        type: integer
+      recharge:
+        type: string
+        description: Natural-language description ("dawn", "short rest", "per scene").
+  key_components:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        origin:
+          type: string
+          description: Where the component came from, if important.
+        note:
+          type: string
+          description: Why this component matters (phoenix feather core, etc.).
+  note:
+    type: string
+    description: GM-only details, ciphers, or hidden riders.
+additionalProperties: true

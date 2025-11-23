@@ -1,0 +1,14 @@
+# Python / tooling
+__pycache__/
+*.pyc
+
+# Editors
+.vscode/
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Archive artifacts
+*.zip

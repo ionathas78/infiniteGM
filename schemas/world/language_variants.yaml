@@ -1,0 +1,61 @@
+# Language variants – accents / sub-dialects with idioms and mapping
+type: object
+title: language_variants
+properties:
+  languages:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        base_language:
+          type: string
+          description: Canonical language id this variant derives from.
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              description:
+                type: string
+              typical_register:
+                type: string
+              idioms:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    phrase:
+                      type: string
+                    meaning:
+                      type: string
+                    notes:
+                      type: string
+                      description: |
+                        Additional info (context, politeness level, etc.).
+              mapping_preferences:
+                type: object
+                properties:
+                  session_language_variant_default:
+                    type: string
+                    description: |
+                      Which variant to use when rendering into the player's language
+                      by default (e.g. "american_southern").
+                  disallowed_mappings:
+                    type: array
+                    items:
+                      type: string
+                    description: |
+                      Variants the user has disabled (e.g. hates Southern accent).
+              note:
+                type: string
+  note:
+    type: string
+    description: Global notes; all lists illustrative, not exhaustive.

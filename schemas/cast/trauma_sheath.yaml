@@ -1,0 +1,72 @@
+# Trauma & baggage sheath – attached to PCs, NPCs, cultures, even factions
+type: object
+title: trauma_sheath
+properties:
+  entries:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+          description: Short name ("Fear of drowning", "Violent when cornered")
+        severity:
+          type: string
+          enum: [minor, moderate, major, catastrophic]
+        scope:
+          type: string
+          enum: [personal, cultural, faction, world]
+          description: Who this trauma "belongs" to.
+        effect:
+          type: string
+          description: |
+            Behavioral effect, not the inciting incident.
+            e.g. "responds violently when threatened", "avoids deep water".
+        cause_hint:
+          type: string
+          description: Very short hint if known; can be vague.
+        triggers:
+          type: array
+          items:
+            type: string
+          description: |
+            Situational triggers; illustrative, not exhaustive.
+        clocks:
+          type: array
+          description: Optional internal progress clocks for healing / escalation.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              max_segments:
+                type: integer
+              filled_segments:
+                type: integer
+              direction:
+                type: string
+                enum: [healing, worsening]
+        visibility:
+          type: string
+          enum: [hidden, gm_only, hinted, explicit]
+          description: Player-facing visibility.
+        xp_hooks:
+          type: object
+          description: |
+            Guidance for XP awards / buys; meta-only.
+          properties:
+            roleplay_reward_enabled:
+              type: boolean
+            buyoff_possible:
+              type: boolean
+            buyoff_requires:
+              type: string
+              description: Summary of what the story must do.
+  note:
+    type: string
+    description: GM-only notes for this sheath.
+additionalProperties: true

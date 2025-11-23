@@ -1,16 +1,43 @@
-event_base:
-  description: "Base must-inherit event for all logged events."
-  fields:
-    id: { type: "string" }
-    ts: { type: "string", description: "ISO8601 timestamp" }
-    type: { type: "string", description: "Event type key" }
-    src_layer: { type: "string", description: "Which subsystem produced this" }
-    tags:
-      type: "array"
-      items: { type: "string" }
-    notes:
-      type: "string"
-    event_refs:
-      type: "array"
-      description: "Optional references into the Events Table or other events."
-      items: { type: "string" }
+# Base must_inherit event schema for InfiniteGM
+type: object
+required: [id, ts, event_type]
+properties:
+  id:
+    type: string
+    description: Unique event id
+  ts:
+    type: string
+    format: date-time
+    description: ISO8601 timestamp
+  event_type:
+    type: string
+    description: Concrete event type discriminator
+  scene_id:
+    type: string
+    description: Optional scene id this event belongs to
+  story_id:
+    type: string
+    description: Optional story/episode id
+  arc_id:
+    type: string
+    description: Optional long-running arc id
+  campaign_id:
+    type: string
+    description: Optional campaign/world id
+  actors:
+    type: array
+    items:
+      type: string
+    description: Cast ids directly involved in the event
+  tags:
+    type: array
+    items:
+      type: string
+    description: Free-form tags (illustrative, not exhaustive)
+  notes:
+    type: string
+    description: GM-only extra info
+  events_ref:
+    type: string
+    description: Optional link to an entry in the Events Table
+additionalProperties: true

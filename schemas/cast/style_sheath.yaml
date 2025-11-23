@@ -1,0 +1,43 @@
+# Style sheath – how a character presents: dress, grooming, scent, voice, etc.
+type: object
+title: style_sheath
+properties:
+  clothing:
+    type: string
+    description: Usual style of dress.
+  grooming:
+    type: string
+    description: Hair, nails, neatness, visible care.
+  scent:
+    type: string
+    description: Typical smell at close range (soap, smoke, engine oil).
+  voice:
+    type: object
+    properties:
+      baseline_register:
+        type: string
+        description: "Low, medium, high, rough, nasal, etc."
+      tempo:
+        type: string
+        description: "Slow, measured, quick-fire, erratic."
+      vocabulary_band:
+        type: string
+        description: |
+          Approximate reading level & style ("street", "academic", "folksy").
+      accent_variant:
+        type: string
+        description: |
+          Language variant in use (Bostonian American English, Kansai Japanese).
+      code_switching:
+        type: string
+        description: |
+          When / why they shift registers or accents (drunk, with family, angry).
+  mannerisms:
+    type: array
+    items:
+      type: string
+    description: Subtle recurring tics or gestures.
+  note:
+    type: string
+    description: GM-only additional cues.
+additionalProperties: true

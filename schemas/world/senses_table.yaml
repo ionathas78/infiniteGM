@@ -1,0 +1,37 @@
+# Extensible sense table – illustrative base entries only
+type: object
+title: senses_table
+properties:
+  senses:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        category:
+          type: string
+          enum: [baseline, exotic]
+        description:
+          type: string
+        translate_to:
+          type: array
+          description: |
+            Which human senses to lean on when narrating this sense.
+          items:
+            type: string
+            enum: [sight, sound, touch, smell, taste, emotion]
+        default_intensity:
+          type: string
+          enum: [low, medium, high]
+        aliases:
+          type: array
+          items:
+            type: string
+        note:
+          type: string
+  note:
+    type: string
+    description: Global notes; illustrative list, not exhaustive.

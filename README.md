@@ -1,33 +1,19 @@
-# InfiniteGM – Prototype Repository
+# InfiniteGM – Vertical Slice Stack
 
-This repository is a a **skeleton implementation** of the InfiniteGM project you’ve been designing in chat.
+This repository contains a *vertical slice* breakdown of the InfiniteGM IDE / runtime design.
 
-It includes:
-- Core instruction set & governance stubs
-- Campaign / world / cast / item schema stubs
-- Agent role manifests (Cardinal, Storywright, Yui, etc.)
-- Event / logging schemas
-- Notes for tests and future expansion
+Current status:
+- **Slice 1** – NPC psychology, PC replacement, trauma clocks (populated)
+- **Slices 2–7** – Scaffolded and ready for content
 
-> **Important:** This is a *starting scaffold*, not a complete implementation. 
-> You can extend or replace any file as you formalize the system.
+Generated: 2025-11-23T09:09:21.034231Z
 
-## Structure
+## Layout
 
-- `docs/` – high‑level design notes and module overviews
-- `schemas/` – YAML schemas for core entities and events
-- `modules/` – configuration & defaults for systems, agents, and behaviors
-- `agents/` – role manifests for agents and writer/gopher pools
-- `worlds/` – example world/campaign stubs
-- `tests/` – notes for pipeline and performance tests
-- `LICENSE` – Creative Commons notice (see below)
+- `slices/` — Each numbered slice has its own folder.
+  - `slice1/` — First vertical slice (current files from your design work).
+  - `slice2`–`slice7/` — Placeholders for future slices.
+- `docs/` — High-level docs and cross-slice notes.
+- `LICENSE` — Creative Commons BY-SA 4.0 summary (per your project preference).
 
-## License
-
-This codebase is intended to be released under a **Creative Commons** license you control.
-By default, this scaffold assumes:
-
-- **Creative Commons Attribution–ShareAlike 4.0 International (CC BY‑SA 4.0)**
-
-See `LICENSE` for a short notice and link to the full legal text on the Creative Commons website.
-You can change this to any other license you prefer.
+This structure is meant to drop straight into a Git repo. You can reorganize as needed once additional slices are authored.

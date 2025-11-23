@@ -1,0 +1,32 @@
+senses:
+  - id: sight
+    label: Normal Vision
+    category: baseline
+    description: Standard human visual perception.
+    translate_to: [sight]
+    default_intensity: medium
+    aliases: [vision]
+  - id: infrared
+    label: Thermal Sense
+    category: exotic
+    description: Perception of heat signatures and temperature gradients.
+    translate_to: [sight, touch]
+    default_intensity: medium
+    aliases: [heat-vision, IR]
+  - id: life_sense
+    label: Life Sense
+    category: exotic
+    description: Ability to perceive living beings through their vitality.
+    translate_to: [emotion, sight]
+    default_intensity: medium
+    aliases: [aura-sense]
+  - id: sense_minds
+    label: Mental Presence Sense
+    category: exotic
+    description: |
+      Perceives nearby minds as pressure, colors, or emotional textures.
+    translate_to: [emotion, sound]
+    default_intensity: medium
+    aliases: [telepathic-radar]
+note: >
+  This list is illustrative and not exhaustive. Settings can extend it freely.

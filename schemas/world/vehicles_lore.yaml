@@ -1,0 +1,76 @@
+# Vehicles & mounts lore – world-level, system-agnostic
+type: object
+title: vehicles_lore
+properties:
+  vehicles:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        scale:
+          type: string
+          enum: [personal, squad, vehicle, dropship, capital]
+        type:
+          type: string
+          description: Free text ("pickup truck", "Viper fighter", "battlemech").
+        narrative_stats:
+          type: object
+          description: |
+            Non-mechanical descriptors for narrative & mapper/arena use.
+          properties:
+            crew_complement:
+              type: string
+            typical_loadout:
+              type: string
+              description: Real-world equipment, not system stats.
+            hardpoints:
+              type: string
+            endurance:
+              type: string
+              description: "Range / flight time / stamina (descriptive)."
+            notable_limits:
+              type: string
+        loci:
+          type: array
+          description: |
+            Named zones for arena/mapper ("cockpit", "cargo bay", "rear arc").
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              description:
+                type: string
+        note:
+          type: string
+  mounts:
+    type: array
+    description: Narratively important mounts and riding animals.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        species:
+          type: string
+        narrative_stats:
+          type: object
+          properties:
+            temperament:
+              type: string
+            gait:
+              type: string
+            typical_uses:
+              type: string
+        note:
+          type: string
+  note:
+    type: string
