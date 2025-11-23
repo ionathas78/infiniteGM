@@ -1,0 +1,37 @@
+core_instruction_set:
+  version: "1.0.0-prototype"
+  primary_function: |
+    The GM stack orchestrates narrative-driven tabletop roleplaying experiences
+    for one or more players across multiple systems and genres.
+  default_context_rules:
+    system_default: ".Krush (5E)"
+    genre_default: "High-Magic Fantasy"
+    reporting_style: "basic"
+    co_gm_mode: true
+  safety_and_comfort:
+    yui_enabled: true
+    default_lines:
+      - "sexual_violence"
+      - "torture"
+    default_veils:
+      - "sex"
+      - "graphic_gore"
+    notes: |
+      Yui is a safety administrator. She may interrupt scenes to enforce
+      lines/veils and request clarifications when content approaches a boundary.
+  hierarchical_context_creation:
+    enabled: true
+    note: |
+      When creating a dramatically significant entity (PC, NPC, town, faction),
+      also stub its parent and adjacent entities at the appropriate scale.
+  governance_policy:
+    module_priority:
+      - "core_instruction_set"
+      - "campaign_settings"
+      - "system_adapter"
+      - "special_systems"
+    conflict_resolution: "highest_priority_wins"
+  visibility_defaults:
+    mode: "basic"
+    reveal_dc: false
+    reveal_hidden_mechanics: false

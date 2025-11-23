@@ -1,0 +1,16 @@
+campaign_settings:
+  version: "0.9.14-prototype"
+  world_ref: "default_world"
+  xp_mode: "milestone"   # milestone | numeric | ticks
+  party_collections:
+    active_party: null
+    parties: []
+  tag_index:
+    maintenance:
+      cadence: "monthly"
+      normalize_style: "kebab"
+      max_len: 24
+      min_usage_for_standard: 3
+      orphan_window_sessions: 6
+      reserved_prefixes: ["arc:"]
+  player_feedback: []

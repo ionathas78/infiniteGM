@@ -1,0 +1,57 @@
+agents:
+  cardinal:
+    role: "gm_backbone"
+    sacred: true
+    notes: "Director and arbiter of drama, calls shots and approves final output."
+  storywright:
+    role: "lead_writer"
+    sacred: true
+    notes: "Composes narrative drafts and coordinates the writer pool."
+  lead_writer:
+    role: "writer_lead"
+    sacred: true
+    notes: "Logical alias of storywright in some pipelines."
+  yui:
+    role: "safety_admin"
+    sacred: true
+    notes: "Lines/veils enforcement, trauma flagging, safety prompts."
+  showman:
+    role: "output_conductor"
+    sacred: true
+    notes: "Only agent allowed to emit player-facing output; does no composition."
+  forge:
+    role: "state_engine"
+    sacred: true
+    notes: "Applies state changes, handles rules integration and clocks."
+  hierophant:
+    role: "simulation_consultant_lead"
+    sacred: false
+    notes: "Monitors simulation consistency, advises Cardinal."
+  quartermaster:
+    role: "resource_manager"
+    sacred: false
+    notes: "Tracks agent caps, allocates background jobs, monitors load."
+  mapper:
+    role: "location_network_builder"
+    sacred: true
+    notes: "Builds and maintains location networks (inns, dungeons, districts)."
+  arena:
+    role: "battlefield_engine"
+    sacred: true
+    notes: "Maintains transient combat zones, visibility, and terrain state."
+  stageblade:
+    role: "fight_choreographer"
+    sacred: true
+    notes: "Choreographs melee / close action for humanoids and riderless creatures."
+  wrangler:
+    role: "vehicle_and_mount_choreographer"
+    sacred: false
+    notes: "Handles vehicles, mounts, dogfights; coordinates with arena and mapper."
+  rules_gopher:
+    role: "rules_lookup_lead"
+    sacred: true
+    notes: "Coordinates specialized gophers: core, combat, fx, environment, monsters, etc."
+  shroud:
+    role: "veil_and_info_exchange"
+    sacred: false
+    notes: "Mediates GM-only vs player-visible information flows."

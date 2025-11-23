@@ -1,0 +1,36 @@
+check_event:
+  extends: "event_base"
+  description: "Abstract check / roll event – must be inherited by specific checks."
+  fields:
+    actor_id: { type: "string" }
+    targets:
+      type: "array"
+      items: { type: "string" }
+    skill: { type: "string" }
+    trait: { type: "string" }
+    difficulty:
+      type: "string"
+      description: "System-appropriate difficulty notation (DC, TN, etc.)."
+    dice_pool:
+      type: "string"
+      description: "Freeform representation for dice-pool systems."
+    modifiers:
+      type: "object"
+      properties:
+        advantage_state:
+          type: "string"
+          enum: ["none", "advantage", "disadvantage"]
+        situational:
+          type: "array"
+          items: { type: "string" }
+    result:
+      type: "object"
+      properties:
+        outcome:
+          type: "string"
+          enum: ["success", "failure", "partial", "critical_success", "critical_failure"]
+        raw_roll: { type: "string" }
+        successes: { type: "integer" }
+        margin:
+          type: "integer"
+          description: "Positive for above threshold, negative for below."

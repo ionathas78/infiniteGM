@@ -1,0 +1,8 @@
+world:
+  id: "default_world"
+  label: "Default Sandbox"
+  type: "generic"
+  description: |
+    A placeholder world used as a scratchpad for InfiniteGM development and tests.
+  regions: []
+  notes: []

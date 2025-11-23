@@ -1,0 +1,19 @@
+speech_event:
+  extends: "event_base"
+  description: "One beat of speech by a single speaker."
+  fields:
+    speaker_id: { type: "string" }
+    language: { type: "string" }
+    language_variant: { type: "string" }
+    intended_audience:
+      type: "array"
+      items: { type: "string" }
+    volume:
+      type: "string"
+      enum: ["whisper", "low", "normal", "loud", "shout"]
+    location_id: { type: "string" }
+    emotional_tone: { type: "string" }
+    render_mode:
+      type: "string"
+      enum: ["session_language", "conlang_phonemes", "mixed"]
+    text: { type: "string" }

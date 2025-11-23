@@ -1,0 +1,52 @@
+$schema: "https://example.com/infinitegm/cast_sleeve.schema.json"
+type: "object"
+title: "Cast Sleeve"
+description: "Primary definition for PCs and major NPCs."
+properties:
+  id:
+    type: "string"
+  name:
+    type: "string"
+  kind:
+    type: "string"
+    enum: ["pc", "npc"]
+  style_sheath:
+    type: "object"
+    description: "Dress, hygiene, characteristic scents and presentation."
+    properties:
+      clothing:
+        type: "string"
+      grooming:
+        type: "string"
+      scent:
+        type: "string"
+      notes:
+        type: "string"
+  trauma_sheath:
+    type: "object"
+    description: "Behavioral effects of past trauma (not the inciting events)."
+    properties:
+      entries:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id: { type: "string" }
+            label: { type: "string" }
+            behavior_effect: { type: "string" }
+            triggers: { type: "string" }
+            severity: { type: "integer" }   # 1..5
+  modifiers_sheath:
+    type: "object"
+    description: "Mechanical and narrative modifiers affecting perception, social, combat, etc."
+    properties:
+      perception:
+        type: "array"
+        items: { type: "string" }
+      social:
+        type: "array"
+        items: { type: "string" }
+      combat:
+        type: "array"
+        items: { type: "string" }
+required: ["id", "name", "kind"]

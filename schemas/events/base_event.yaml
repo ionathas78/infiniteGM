@@ -1,0 +1,16 @@
+event_base:
+  description: "Base must-inherit event for all logged events."
+  fields:
+    id: { type: "string" }
+    ts: { type: "string", description: "ISO8601 timestamp" }
+    type: { type: "string", description: "Event type key" }
+    src_layer: { type: "string", description: "Which subsystem produced this" }
+    tags:
+      type: "array"
+      items: { type: "string" }
+    notes:
+      type: "string"
+    event_refs:
+      type: "array"
+      description: "Optional references into the Events Table or other events."
+      items: { type: "string" }
