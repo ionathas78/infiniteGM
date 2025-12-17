@@ -1,0 +1,26 @@
+# campaign_settings.xflags_addendum.yaml
+# Slice: Learning
+# Purpose: Human-readable xflags key references + examples (campaign settings remain canonical).
+
+campaign_settings_xflags_addendum.v0.1:
+  xflags:
+    schema: "sx.v1"
+    purpose: "Runtime compression for session sheaths; campaign settings remain canonical."
+    docs_ref: "note:xflags:sx.v1"
+    human_key_ref: "note:xflags:sx.v1:key"
+    examples_ref: "note:xflags:sx.v1:examples"
+
+  notes:
+    - id: "note:xflags:sx.v1:examples"
+      title: "sx.v1 examples"
+      body: |
+        Example A: Turn on weather + time callouts, forbid precision, narration=medium.
+          - bits: weather_ok=1, time_ok=1, forbid_precision=1
+          - narration_density=medium (1)
+          -> sx_delta (conceptual): sets bits 0,1,4 and enum bits 8-9=01
+
+        Example B: Hedge mode + sparse options + soft meta, keep everything else canonical.
+          - runtime.hedge_mode=1
+          - option_density_mode=sparse (0)
+          - meta_visibility=soft (1)
+          -> sx_delta sets bit 5 and enum ranges accordingly

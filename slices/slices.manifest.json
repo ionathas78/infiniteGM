@@ -1,0 +1,141 @@
+{
+  "manifest_version": "1.0.0",
+  "project": "infiniteGM",
+  "generated_utc": "2025-12-16T14:33:04Z",
+  "notes": "Slice manifest + loader scaffold. Paths are project-relative. Adjust to match your repo layout.",
+  "slices": [
+    {
+      "id": "slice_01_core",
+      "title": "Core",
+      "order": 1,
+      "description": "Truth/authority, continuity laws, global defaults, invariants.",
+      "root": "slices/01_core",
+      "entrypoints": [
+        "slices/01_core/core_instructions.md",
+        "slices/01_core/core_directives.yaml",
+        "slices/01_core/core_schema.json"
+      ],
+      "tags": [
+        "core",
+        "authority",
+        "invariants"
+      ]
+    },
+    {
+      "id": "slice_02_world",
+      "title": "World",
+      "order": 2,
+      "description": "Setting state: geography, factions, cultures, logistics, timelines.",
+      "root": "slices/02_world",
+      "entrypoints": [
+        "slices/02_world/world_overview.md",
+        "slices/02_world/places.yaml",
+        "slices/02_world/timelines.yaml"
+      ],
+      "tags": [
+        "world",
+        "setting",
+        "lore"
+      ]
+    },
+    {
+      "id": "slice_03_cast",
+      "title": "Cast",
+      "order": 3,
+      "description": "NPC/PC registries, trust/secrets, archetypes, relationships.",
+      "root": "slices/03_cast",
+      "entrypoints": [
+        "slices/03_cast/cast_registry.yaml",
+        "slices/03_cast/archetypes.yaml",
+        "slices/03_cast/relationships.yaml"
+      ],
+      "tags": [
+        "cast",
+        "npc",
+        "pc",
+        "trust"
+      ]
+    },
+    {
+      "id": "slice_04_systems",
+      "title": "Systems",
+      "order": 4,
+      "description": "Rules modules: action economy, combat, social, conditions, special systems.",
+      "root": "slices/04_systems",
+      "entrypoints": [
+        "slices/04_systems/action_economy.yaml",
+        "slices/04_systems/conditions.yaml",
+        "slices/04_systems/special_systems.yaml"
+      ],
+      "tags": [
+        "rules",
+        "mechanics",
+        "resolution"
+      ]
+    },
+    {
+      "id": "slice_05_story",
+      "title": "Story",
+      "order": 5,
+      "description": "Arcs, echo logic, retrospective causality, continuity laws application.",
+      "root": "slices/05_story",
+      "entrypoints": [
+        "slices/05_story/story_overview.md",
+        "slices/05_story/arcs.yaml",
+        "slices/05_story/echoes.yaml"
+      ],
+      "tags": [
+        "story",
+        "arcs",
+        "continuity"
+      ]
+    },
+    {
+      "id": "slice_06_meta",
+      "title": "Meta",
+      "order": 6,
+      "description": "Preferences, safety, audits, logging, tooling, debug/training toggles.",
+      "root": "slices/06_meta",
+      "entrypoints": [
+        "slices/06_meta/preferences.yaml",
+        "slices/06_meta/system_logging.yaml",
+        "slices/06_meta/audits.yaml"
+      ],
+      "tags": [
+        "meta",
+        "logging",
+        "audits",
+        "preferences"
+      ]
+    },
+    {
+      "id": "slice_07_learning",
+      "title": "Learning",
+      "order": 7,
+      "description": "Progression: habits, skill emergence, unlocks, player vs character knowledge boundaries.",
+      "root": "slices/07_learning",
+      "entrypoints": [
+        "slices/07_learning/learning_directives.yaml",
+        "slices/07_learning/learning_ledger_schema.json",
+        "slices/07_learning/learning_notes.md"
+      ],
+      "tags": [
+        "learning",
+        "habits",
+        "progression",
+        "unlocks"
+      ]
+    }
+  ],
+  "loader": {
+    "recommended_entry": "tools/load_slices.py",
+    "default_extensions": [
+      ".yaml",
+      ".yml",
+      ".json",
+      ".md",
+      ".txt"
+    ],
+    "strict_mode_default": true
+  }
+}

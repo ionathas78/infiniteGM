@@ -1,0 +1,5 @@
+registries.xflags.index.v0.1:
+  schemas:
+    - id: "sx.v1"
+      file: "registries/xflags/sx.v1.yaml"
+      notes_key_ref: "note:xflags:sx.v1:key"

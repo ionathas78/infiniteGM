@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "infinitegm://schemas/core_machine_spec/1.0.0",
+  "title": "infiniteGM Core Machine Specification",
+  "type": "object",
+  "required": [
+    "core",
+    "authority",
+    "truth_model",
+    "time",
+    "dice",
+    "knowledge",
+    "enforcement",
+    "defaults"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "core": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "status",
+        "scope",
+        "supersedes",
+        "charter_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "infiniteGM_core"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "canonical",
+            "draft",
+            "deprecated"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "project",
+            "session"
+          ]
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "charter_ref": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

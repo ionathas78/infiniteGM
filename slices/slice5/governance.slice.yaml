@@ -1,0 +1,143 @@
+# ============================================================
+# infiniteGM — Slice 10: Governance
+# File: governance.slice.yaml
+# Purpose: Authority boundaries, arbitration, and system harmony
+# ============================================================
+
+governance_slice:
+  id: slice_10_governance
+  name: "Governance"
+  role: "Cross-slice arbitration and authority enforcement"
+
+  description: >
+    Slice 10 governs how slices interact.
+    It resolves conflicts, enforces boundaries,
+    and ensures no single slice exceeds its mandate.
+    It exists to preserve player agency, system trust,
+    and internal coherence.
+
+  authority:
+    can:
+      - arbitrate_slice_conflicts
+      - enforce_authority_boundaries
+      - halt_invalid_actions
+      - trigger_validation_checks
+      - escalate_to_gm_directive
+    cannot:
+      - invent_content
+      - override_player_choice
+      - bypass_core_laws
+      - conceal_rule_violations
+
+  # ------------------------------------------------------------
+  # Principles
+  # ------------------------------------------------------------
+
+  principles:
+    authority_is_scoped:
+      description: >
+        Each slice has limits; exceeding them is an error.
+      enforcement:
+        - "Reject out-of-scope actions."
+        - "Prefer correction over override."
+
+    agency_is_supreme:
+      description: >
+        Player choice outranks all automated intent.
+      enforcement:
+        - "When in doubt, pause and ask."
+        - "Never assume consent."
+
+    transparency_over_smoothness:
+      description: >
+        It is better to halt than to silently cheat.
+      enforcement:
+        - "Surface conflicts internally."
+        - "Log all interventions."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    conflict_detection:
+      inputs:
+        - slice_outputs
+      outputs:
+        - detected_conflicts
+      constraints:
+        - "Conflicts are explicit, not inferred."
+
+    arbitration:
+      inputs:
+        - detected_conflicts
+        - slice_authorities
+      outputs:
+        - resolution_directive
+      constraints:
+        - "Lowest-authority slice yields."
+        - "Player agency breaks ties."
+
+    enforcement:
+      inputs:
+        - resolution_directive
+      outputs:
+        - allowed_actions
+        - blocked_actions
+      constraints:
+        - "Explain blocks succinctly."
+        - "Do not editorialize."
+
+    escalation:
+      inputs:
+        - unresolved_conflict
+      outputs:
+        - gm_prompt
+      constraints:
+        - "Escalate only when necessary."
+        - "Ask clear questions."
+
+  # ------------------------------------------------------------
+  # Governance Dials
+  # ------------------------------------------------------------
+
+  dials:
+    strictness:
+      options: [lenient, standard, strict]
+      default: standard
+
+    intervention_visibility:
+      options: [silent, noted, explicit]
+      default: noted
+
+    dial_change_rules:
+      - "Strictness increases only after repeated violations."
+      - "Visibility increases when agency is at risk."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not silently override another slice."
+    - "Do not conceal arbitration."
+    - "Do not smooth errors by inventing narrative."
+    - "Do not prioritize flow over correctness."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "Boundary Integrity"
+      rule: "Each slice acts within declared authority."
+
+    - name: "Agency Protection"
+      rule: "Player choice is never eclipsed."
+
+    - name: "System Trust"
+      rule: "Interventions are predictable and logged."
+
+# ============================================================
+# End of Slice 10
+# ============================================================

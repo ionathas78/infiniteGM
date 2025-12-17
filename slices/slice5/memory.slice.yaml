@@ -1,0 +1,149 @@
+# ============================================================
+# infiniteGM — Slice 8: Memory
+# File: memory.slice.yaml
+# Purpose: Persistence, recall, and historical continuity
+# ============================================================
+
+memory_slice:
+  id: slice_8_memory
+  name: "Memory"
+  role: "Persistent state, recall logic, and historical consequence"
+
+  description: >
+    Slice 8 governs what the world remembers.
+    It records events, tracks lasting impressions,
+    manages recall and forgetting, and ensures that
+    history exerts pressure on the present.
+
+  authority:
+    can:
+      - record_events
+      - persist_state_changes
+      - govern_recall_and_forgetting
+      - surface_relevant_history
+      - weight_memory_by_significance
+    cannot:
+      - retroactively_alter_logged_events
+      - erase_memory_without_cause
+      - surface_hidden_information
+      - editorialize_past_events
+
+  # ------------------------------------------------------------
+  # Principles
+  # ------------------------------------------------------------
+
+  principles:
+    memory_is_selective:
+      description: >
+        Not everything is remembered equally.
+      enforcement:
+        - "Trivial events decay."
+        - "Significant events persist."
+
+    memory_has_weight:
+      description: >
+        Past actions influence trust, fear, and expectation.
+      enforcement:
+        - "Reputation modifies future interactions."
+        - "History shapes first impressions."
+
+    forgetting_is_causal:
+      description: >
+        Forgetting happens for reasons, not convenience.
+      enforcement:
+        - "Time, trauma, suppression, or distance."
+        - "Never forget without justification."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    event_logging:
+      inputs:
+        - scene_outcomes
+        - participant_entities
+      outputs:
+        - event_records
+      constraints:
+        - "Log who knows, not just what happened."
+        - "Tag scope and permanence."
+
+    recall_filtering:
+      inputs:
+        - current_context
+        - querying_entity
+      outputs:
+        - surfaced_memories
+      constraints:
+        - "Only surface memories plausibly accessible."
+        - "Bias recall by emotion and relevance."
+
+    decay_and_persistence:
+      inputs:
+        - time_elapsed
+        - memory_significance
+      outputs:
+        - memory_strength_adjustment
+      constraints:
+        - "Important memories resist decay."
+        - "Reinforced memories strengthen."
+
+    reputation_projection:
+      inputs:
+        - accumulated_events
+        - observing_faction
+      outputs:
+        - expectation_bias
+      constraints:
+        - "Secondhand knowledge is distorted."
+        - "Rumors exaggerate or simplify."
+
+  # ------------------------------------------------------------
+  # Memory Dials
+  # ------------------------------------------------------------
+
+  dials:
+    recall_fidelity:
+      options: [fuzzy, contextual, precise]
+      default: contextual
+
+    decay_rate:
+      options: [slow, normal, rapid]
+      default: normal
+
+    rumor_noise:
+      options: [low, medium, high]
+      default: medium
+
+    dial_change_rules:
+      - "Dial changes require systemic or narrative cause."
+      - "High fidelity requires direct experience or records."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not grant omniscient recall."
+    - "Do not forget for player convenience."
+    - "Do not surface secrets prematurely."
+    - "Do not collapse rumor into fact."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "Historical Consistency"
+      rule: "Past events influence present state."
+
+    - name: "Access Control"
+      rule: "Knowledge follows exposure paths."
+
+    - name: "Decay Integrity"
+      rule: "Memory strength changes over time."
+
+# ============================================================
+# End of Slice 8
+# ============================================================

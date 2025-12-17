@@ -1,0 +1,31 @@
+sheath_xflags_registry.v1:
+  schema_id: "sx.v1"
+  desc: "Session sheath parameter compression. Campaign settings remain canonical."
+  notes_ref: "note:xflags:sx.v1"
+  encoding:
+    width_bits: 32
+    format: "hex"
+    allow_underscores: true
+
+  bits:
+    0: { key: "ambient.weather_ok" }
+    1: { key: "ambient.time_ok" }
+    2: { key: "meta.character_lens_ok" }
+    3: { key: "meta.gear_visibility_ok" }
+    4: { key: "safety.forbid_precision" }
+    5: { key: "runtime.hedge_mode" }
+    6: { key: "convo.allow_resume" }
+    7: { key: "convo.default_resume" }
+
+  enums:
+    narration_density:   { offset: 8,  bits: 2, map: { 0: low, 1: medium, 2: high, 3: auto } }
+    option_density_mode: { offset: 10, bits: 2, map: { 0: sparse, 1: normal, 2: dense, 3: auto } }
+    meta_visibility:     { offset: 12, bits: 2, map: { 0: hidden, 1: soft, 2: explicit, 3: auto } }
+    recovery_style_hint: { offset: 14, bits: 3, map: { 0: unknown, 1: levity, 2: mastery, 3: reassurance, 4: quiet, 5: distraction, 6: auto, 7: auto } }
+
+  apply_rules:
+    precedence:
+      - "campaign_settings (canonical)"
+      - "session_sheath.sx_delta (diff)"
+    forbid_precision_always_wins: true
+    if_bit_unset_means: "no_override"

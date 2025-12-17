@@ -1,0 +1,34 @@
+# systems_active.yaml
+# InfiniteGM — Active Systems
+# Purpose: Systems that are always in effect and continuously shape play.
+
+systems_active:
+  resolution:
+    automatic_success:
+      always_available: true
+    partial_success:
+      always_available: true
+
+  action_economy:
+    spotlight:
+      always_available: true
+    interrupts:
+      always_available: true
+
+  conditions:
+    state_application:
+      always_available: true
+    escalation:
+      always_available: true
+
+  advancement:
+    growth:
+      always_available: true
+
+  social:
+    influence:
+      always_available: true
+
+  environment:
+    world_pressure:
+      always_available: true

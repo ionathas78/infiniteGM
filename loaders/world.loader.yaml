@@ -1,0 +1,4 @@
+world.loader.v0.1:
+  intent: "Load order for world slice modules."
+  order: []
+  deltas: []

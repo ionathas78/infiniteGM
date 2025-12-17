@@ -1,0 +1,123 @@
+# Slice 3 — Cast Dynamics
+# Version: Cast.Dynamics.v1.0
+# Global rules governing memory, mood drift, mutation, promotion, and death
+
+cast_dynamics:
+  version: Cast.Dynamics.v1.0
+  description: >
+    Global behavioral physics for all Cast entities.
+    These rules apply uniformly unless explicitly overridden.
+    They govern how NPCs remember, change, escalate, and disappear.
+
+  memory_rules:
+    encoding:
+      default_bias:
+        kindness: low
+        competence: moderate
+        humiliation: high
+        betrayal: extreme
+      note: >
+        Negative or status-threatening events encode more strongly
+        than positive ones unless an NPC has a specific counter-trait.
+
+    decay:
+      slow:
+        description: "Memory persists across long narrative gaps."
+      normal:
+        description: "Memory fades after several scenes unless reinforced."
+      fast:
+        description: "Memory fades quickly unless repeatedly triggered."
+
+    reinforcement:
+      strengthens_on:
+        - repeated_exposure
+        - public_visibility
+        - emotional_intensity
+      weakens_on:
+        - long_absence
+        - competing_trauma
+        - narrative_resolution
+
+  mood_drift:
+    baseline:
+      description: >
+        NPCs begin scenes at their last known mood state.
+        Mood does not reset unless narratively justified.
+    drift_factors:
+      - recent_success
+      - recent_failure
+      - social_validation
+      - isolation
+    inertia:
+      low: "Mood shifts easily."
+      moderate: "Mood resists sudden reversal."
+      high: "Mood is sticky and slow to change."
+
+  escalation_logic:
+    pressure_accumulation:
+      sources:
+        - unmet_drives
+        - repeated_humiliation
+        - resource_loss
+        - blocked_exit_paths
+      outcome:
+        description: >
+          Accumulated pressure increases likelihood of rash,
+          aggressive, or desperate behavior.
+
+    deescalation_triggers:
+      - face_saving_exit
+      - compensation_or_concession
+      - authority_intervention
+      - exhaustion
+
+  promotion_rules:
+    eligibility:
+      conditions:
+        - repeated_player_interaction
+        - survival_of_major_incident
+        - possession_of_valuable_information
+      note: >
+        Promotion moves an NPC from background or midground
+        toward foreground relevance.
+
+    effects:
+      - expanded_memory_scope
+      - increased_relationship_web
+      - higher_consequence_weight
+
+  demotion_rules:
+    conditions:
+      - loss_of_power
+      - loss_of_relevance
+      - replacement_by_superior_actor
+    effects:
+      - reduced_screen_time
+      - narrower_decision_scope
+
+  death_and_absence:
+    death_states:
+      alive: "Entity remains active."
+      missing: "Entity absent; fate unresolved."
+      dead: "Entity removed as actor."
+      unknown: "Contradictory or obscured reports."
+
+    propagation:
+      effects:
+        - relationship_reactions
+        - rumor_generation
+        - faction_shift
+      note: >
+        Death is a state change, not deletion.
+        Its consequences propagate outward.
+
+  authority_limits:
+    invariants:
+      - "Dynamics never override explicit player action."
+      - "No NPC change forces a PC decision."
+      - "Escalation must remain reactively justified."
+
+  usage_notes:
+    - "Apply dynamics consistently across all NPCs."
+    - "Prefer subtle drift over sudden reversals."
+    - "Let consequences outlive scenes."

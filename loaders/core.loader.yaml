@@ -1,0 +1,4 @@
+core.loader.v0.1:
+  intent: "Load order for core slice modules."
+  order: []
+  deltas: []

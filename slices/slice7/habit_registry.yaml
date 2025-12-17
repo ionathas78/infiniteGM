@@ -1,0 +1,171 @@
+habit_registry.v1.0
+module: slice_07_learning
+description: >
+  Authoritative registry of declared Habits. Habits represent crystallized,
+  always-true behavioral rules with mechanical consequences. Once declared,
+  Habits persist until explicitly replaced or resolved through play.
+
+version:
+  major: 1
+  minor: 0
+  patch: 0
+  last_updated: 2025-12-17
+
+policy:
+  authoritative: true
+  retroactive_edits: false
+  declaration_visibility: gm_only_by_default
+  player_notification:
+    on_declare: optional
+    on_trigger: implicit   # players feel it through fiction/mechanics
+
+schema:
+  habit:
+    id: "habit:<slug>"
+    entity_ref: "pc:<id> | npc:<id>"
+    label: "Short, evocative name"
+    description: "Plain-language summary of the behavior"
+    origin:
+      from_entries: ["learn:<uuid>"]
+      temperament_context: "bold|cautious|stubborn|anxious|empathic|unknown"
+      declared_on: "ISO8601Z"
+    trigger:
+      when: "fictional condition or pattern"
+      frequency: "always|often|under_stress|conditional"
+    mechanical_effect:
+      type: "bonus|penalty|constraint|permission|mixed"
+      effect:
+        advantage: null
+        disadvantage: null
+        modifier: null
+        auto_trigger: false
+        special: null
+    escalation:
+      repeats_strengthen: true
+      max_tier: 3
+      current_tier: 1
+      tier_effects:
+        1: "baseline effect"
+        2: "strengthened effect"
+        3: "dominant defining behavior"
+    replacement:
+      allowed: true
+      cost: "high"
+      requires:
+        - deliberate_counterplay
+        - meaningful_consequence
+    notes: "Free text"
+
+# -------------------------------------------------------------------
+# HABITS
+# -------------------------------------------------------------------
+
+habits:
+
+  - id: "habit:holds_fire_until_read"
+    entity_ref: "pc:example_protagonist"
+    label: "Wait for the Read"
+    description: >
+      Tends to delay action until opponents reveal intent,
+      favoring counter-timing over initiative grabs.
+    origin:
+      from_entries:
+        - "learn:00000000-0000-0000-0000-000000000003"
+      temperament_context: "cautious"
+      declared_on: "2025-12-17T06:00:00Z"
+    trigger:
+      when: "entering combat or tense standoff"
+      frequency: "often"
+    mechanical_effect:
+      type: "permission"
+      effect:
+        advantage: "first defensive or counter action each scene"
+        disadvantage: null
+        modifier: null
+        auto_trigger: true
+        special: "May delay initiative without penalty once per scene."
+    escalation:
+      repeats_strengthen: true
+      max_tier: 3
+      current_tier: 1
+      tier_effects:
+        1: "One free defensive/counter advantage per scene."
+        2: "Defensive/counter advantage persists until first hit dealt or taken."
+        3: "Opponents suffer disadvantage when attempting to bait action."
+    replacement:
+      allowed: true
+      cost: "high"
+      requires:
+        - "force initiative play repeatedly"
+        - "suffer loss due to hesitation"
+    notes: "Feels calm, deliberate, and slightly unnerving to observers."
+
+  - id: "habit:overcorrects_after_mistake"
+    entity_ref: "pc:example_protagonist"
+    label: "Overcorrects After a Slip"
+    description: >
+      After making a visible mistake, tends to adjust too aggressively,
+      sometimes trading safety for certainty.
+    origin:
+      from_entries:
+        - "learn:00000000-0000-0000-0000-000000000002"
+      temperament_context: "anxious"
+      declared_on: "2025-12-17T06:00:00Z"
+    trigger:
+      when: "immediately after a failed or embarrassing action"
+      frequency: "under_stress"
+    mechanical_effect:
+      type: "mixed"
+      effect:
+        advantage: "next corrective action gains momentum bonus"
+        disadvantage: "loses subtlety; suffers penalty to deception or finesse"
+        modifier: null
+        auto_trigger: true
+        special: null
+    escalation:
+      repeats_strengthen: true
+      max_tier: 3
+      current_tier: 1
+      tier_effects:
+        1: "Small momentum bonus, small finesse penalty."
+        2: "Larger momentum bonus; finesse penalty increases."
+        3: "Compulsive correction; cannot choose inaction after a mistake."
+    replacement:
+      allowed: true
+      cost: "very_high"
+      requires:
+        - "publicly succeed without overcorrection"
+        - "accept visible failure without immediate compensation"
+    notes: "Often reads as intensity or desperation, depending on context."
+
+  # Template
+  - id: "habit:<new_habit_id>"
+    entity_ref: "pc:<your_pc_id_here>"
+    label: "<Name>"
+    description: "<Description>"
+    origin:
+      from_entries: []
+      temperament_context: "unknown"
+      declared_on: "ISO8601Z"
+    trigger:
+      when: "<fictional trigger>"
+      frequency: "conditional"
+    mechanical_effect:
+      type: "bonus|penalty|constraint|permission|mixed"
+      effect:
+        advantage: null
+        disadvantage: null
+        modifier: null
+        auto_trigger: false
+        special: null
+    escalation:
+      repeats_strengthen: false
+      max_tier: 1
+      current_tier: 1
+      tier_effects:
+        1: "<effect>"
+    replacement:
+      allowed: true
+      cost: "medium"
+      requires: []
+    notes: ""

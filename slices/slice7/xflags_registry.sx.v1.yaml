@@ -1,0 +1,71 @@
+# xflags_registry.sx.v1.yaml
+# Slice: Learning
+# Purpose: Registry for session-sheath compact flags (sx_delta) and enum packing.
+
+sheath_xflags_registry.v1:
+  schema_id: "sx.v1"
+  desc: "Session sheath parameter compression. Campaign settings remain canonical."
+  notes_ref: "note:xflags:sx.v1"
+  encoding:
+    width_bits: 32
+    format: "hex"
+    allow_underscores: true
+
+  bits:
+    0: { key: "ambient.weather_ok",      desc: "Allow coarse weather callouts." }
+    1: { key: "ambient.time_ok",         desc: "Allow local-time callouts." }
+    2: { key: "meta.character_lens_ok",  desc: "Allow character-lens contributions in system talk when constructive." }
+    3: { key: "meta.gear_visibility_ok", desc: "Allow explicit gear/structure talk in convo mode (soft)." }
+    4: { key: "safety.forbid_precision", desc: "Forbid creepy precision phrasing (timestamps/window talk)." }
+    5: { key: "runtime.hedge_mode",      desc: "Prefer hedged/optional phrasing (uncertainty or change-point)." }
+    6: { key: "convo.allow_resume",      desc: "Allow the player to resume prior convo state." }
+    7: { key: "convo.default_resume",    desc: "Default start mode = resume (only if player gives no instruction)." }
+
+  enums:
+    narration_density:
+      offset: 8
+      bits: 2
+      map: { 0: "low", 1: "medium", 2: "high", 3: "auto" }
+    option_density_mode:
+      offset: 10
+      bits: 2
+      map: { 0: "sparse", 1: "normal", 2: "dense", 3: "auto" }
+    meta_visibility:
+      offset: 12
+      bits: 2
+      map: { 0: "hidden", 1: "soft", 2: "explicit", 3: "auto" }
+    recovery_style_hint:
+      offset: 14
+      bits: 3
+      map: { 0: "unknown", 1: "levity", 2: "mastery", 3: "reassurance", 4: "quiet", 5: "distraction", 6: "auto", 7: "auto" }
+
+  apply_rules:
+    precedence:
+      - "campaign_settings (canonical)"
+      - "session_sheath.sx_delta (diff)"
+    forbid_precision_always_wins: true
+    if_bit_unset_means: "no_override"  # for sx_delta: unset bits imply no change, not false
+
+  notes:
+    - id: "note:xflags:sx.v1"
+      title: "Session XFlags sx.v1 overview"
+      body: >
+        sx_delta is a compact diff mask used in session sheaths to reduce repeated strings.
+        It never replaces canonical campaign settings. It only overrides for the session/scene.
+    - id: "note:xflags:sx.v1:key"
+      title: "sx.v1 key"
+      body: |
+        Bits:
+          0 ambient.weather_ok
+          1 ambient.time_ok
+          2 meta.character_lens_ok
+          3 meta.gear_visibility_ok
+          4 safety.forbid_precision
+          5 runtime.hedge_mode
+          6 convo.allow_resume
+          7 convo.default_resume
+        Enums:
+          narration_density @bits 8-9
+          option_density_mode @bits 10-11
+          meta_visibility @bits 12-13
+          recovery_style_hint @bits 14-16

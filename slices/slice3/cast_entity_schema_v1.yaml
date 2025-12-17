@@ -1,0 +1,102 @@
+# Slice 3 — Cast Entity Schema
+# Version: Cast.v1.0
+# Canonical, system-agnostic schema for all NPC entities
+
+entity_schema:
+  version: Cast.v1.0
+  description: >
+    Canonical schema governing all Cast entities.
+    Defines agency, tendency, memory, and evolution.
+    Declarative only. No scripted outcomes.
+
+  entity:
+    entity_id: "<unique_id>"
+
+    identity:
+      name: "<string>"
+      aliases: []
+      public_face: "<general reputation or perception>"
+
+    roles:
+      narrative:
+        - ally
+        - antagonist
+        - wildcard
+        - obstacle
+        - background
+      functional:
+        - merchant
+        - guard
+        - scholar
+        - criminal
+        - official
+        - other
+
+    drives:
+      wants: []
+      fears: []
+      pressures: []
+
+    constraints:
+      moral_lines: []
+      resource_limits: []
+      obligations: []
+
+    relationships:
+      allies: []
+      rivals: []
+      dependents: []
+      leverage: []
+
+    competence:
+      strengths: []
+      weaknesses: []
+      confidence_level: low | moderate | high
+
+    failure_modes:
+      under_pressure:
+        - panic
+        - violence
+        - bargain
+        - withdraw
+        - lie
+      when_exposed:
+        - deny
+        - deflect
+        - flee
+        - escalate
+
+    memory_hooks:
+      remembers:
+        kindness: true
+        humiliation: true
+        threats: true
+      decay_rate: slow | normal | fast
+
+    evolution_rules:
+      promotion_triggers: []
+      breaking_triggers: []
+      death_state: alive | missing | dead | unknown
+
+    system_overlays:
+      <system_name>:
+        stats_ref: "<pointer or id>"
+        special_rules: []
+
+  authority_safeguards:
+    allowed:
+      - generate_npc_reactions
+      - adjust_mood_and_disposition
+      - apply_memory_and_consequence
+      - escalate_or_deescalate_conflict
+    forbidden:
+      - author_pc_dialogue
+      - choose_pc_actions
+      - force_outcomes_without_player_input
+      - retroactive_omniscience
+
+  usage_notes:
+    - "Populate fields with short phrases, not sentences."
+    - "Empty fields are allowed; missing fields are not."
+    - "Behavioral logic belongs in modules, not entities."
+    - "Schema defines capability and tendency, never destiny."

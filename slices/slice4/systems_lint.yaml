@@ -1,0 +1,68 @@
+# systems_lint.yaml
+# InfiniteGM — Systems Lint & Compliance Spec
+# Purpose: Validate adherence to Slice 4 (Systems) during runtime and ingestion.
+# Audience: Machine validation, CI checks, post-session audits.
+
+lint:
+  id: systems_lint
+  version: 1.0
+  applies_to:
+    - slice: systems
+    - adapters: all
+
+rules:
+
+  agency_protection:
+    severity: error
+    checks:
+      - no_player_actions_inferred: true
+      - no_irreversible_decisions_without_prompt: true
+      - no_autopilot_pc: true
+
+  narration_silence:
+    severity: warn
+    checks:
+      - mechanical_language_suppressed_by_default: true
+      - hidden_thresholds_not_exposed: true
+
+  rng_hygiene:
+    severity: warn
+    checks:
+      - no_roll_without_consequence: true
+      - reuse_results_when_context_unchanged: true
+
+  latent_system_integrity:
+    severity: error
+    checks:
+      - latent_systems_not_announced: true
+      - activation_requires_conditions: true
+      - refusal_is_possible: true
+
+  forward_momentum:
+    severity: warn
+    checks:
+      - partial_success_advances_fiction: true
+      - failures_introduce_complications_not_stalls: true
+
+telemetry:
+  emit_on_violation:
+    - rule_id
+    - severity
+    - scene_id
+    - packet_id
+  aggregate_post_session: true
+
+autofix:
+  enabled: true
+  strategies:
+    - suppress_mechanical_exposition
+    - reframe_failure_as_complication
+    - reinsert_player_prompt_on_agency_risk
+
+reporting:
+  formats:
+    - yaml
+    - json
+  destinations:
+    - session_log
+    - audit_export

@@ -1,0 +1,71 @@
+# world.state.yaml
+# Slice 2 — World State
+# Purpose: Capture the current, mutable condition of the world at the start of play.
+
+world_state:
+  id: state_initial
+  version: 1.0
+  status: active
+  mutability: mutable
+
+  current_time:
+    calendar: common_era
+    date: day_12_month_3_year_412
+    season: early_spring
+
+  regional_states:
+    - region: north_vale
+      conditions:
+        - swollen_rivers
+        - delayed_caravans
+      environmental_modifiers:
+        travel_speed: reduced
+        river_access: hazardous
+
+  active_events:
+    - id: salt_shortage
+      scope: regional
+      affected_regions: [north_vale]
+      description: >
+        Salt shipments along the river have been disrupted,
+        increasing prices and tension among traders.
+      clocks:
+        escalation:
+          segments: 6
+          filled: 2
+        resolution:
+          segments: 4
+          filled: 0
+
+  faction_states:
+    - faction: river_guild
+      posture: defensive
+      pressure_level: moderate
+
+    - faction: free_caravans
+      posture: opportunistic
+      pressure_level: rising
+
+    - faction: terhaven_council
+      posture: mediating
+      pressure_level: high
+
+  reputation_shifts:
+    global: {}
+    regional:
+      north_vale: {}
+
+  update_rules:
+    mutation_triggers:
+      - player_action
+      - significant_inaction
+      - clock_completion
+    persistence:
+      default: until_changed
+      temporary_conditions: expire_after_resolution
+
+  design_notes:
+    guidance: >
+      This file should be updated sparingly and deliberately.
+      Each change represents a meaningful shift in the world,
+      not a momentary scene detail.

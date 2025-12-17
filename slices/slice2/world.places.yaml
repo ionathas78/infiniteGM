@@ -1,0 +1,65 @@
+# world.places.yaml
+# Slice 2 — World Places
+# Purpose: Define geographic anchors and locations that exist independently of player action.
+
+world_places:
+  id: places_core
+  version: 1.0
+  status: canonical
+
+  regions:
+    - id: north_vale
+      kind: region
+      climate: temperate
+      traits: [fertile, river_bound, trade_corridor]
+      invariants:
+        - seasonal_flooding
+        - arable_land
+      adjacent_regions: [highmarch, southreach]
+
+  settlements:
+    - id: terhaven
+      kind: city
+      region: north_vale
+      population_scale: large
+      traits: [trade_hub, river_port, mixed_population]
+      tensions: [salt_shortage, guild_pressure]
+      invariants:
+        - river_access
+        - active_market
+      visibility: player_known
+
+    - id: stonecross
+      kind: town
+      region: north_vale
+      population_scale: small
+      traits: [bridge_toll, caravan_stop]
+      tensions: [bandit_activity]
+      invariants:
+        - single_bridge_crossing
+      visibility: discoverable
+
+  landmarks:
+    - id: old_kings_road
+      kind: roadway
+      connects: [terhaven, stonecross]
+      traits: [ancient, well_traveled]
+      hazards: [weather_wear, tolls]
+      visibility: player_known
+
+    - id: sunken_shrine
+      kind: ruin
+      region: north_vale
+      traits: [flooded, forbidden]
+      myths: [sleeping_god, cursed_waters]
+      visibility: mythic
+
+  travel_rules:
+    base_travel:
+      on_foot: slow
+      mounted: moderate
+      caravan: slow_but_safe
+    modifiers:
+      weather: significant
+      terrain: significant
+      local_control: moderate

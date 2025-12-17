@@ -1,0 +1,71 @@
+# systems_ci_enforcement.yaml
+# InfiniteGM — Systems CI / IDE Enforcement
+# Purpose: Enforce Slice 4 (Systems) compliance in tooling, CI, and IDE workflows.
+
+ci_enforcement:
+  id: systems_ci
+  version: 1.0
+
+scope:
+  applies_to:
+    - model_ingestion
+    - prompt_templates
+    - runtime_sessions
+    - post_session_exports
+
+pre_ingest_checks:
+  - file_exists: systems_bootstrap.md
+  - file_exists: slice_04_systems.yaml
+  - file_exists: systems_active.yaml
+  - file_exists: systems_latent.yaml
+  - file_exists: systems_lint.yaml
+  - file_exists: ingestion_order_manifest.yaml
+  - enforce_ingestion_order: true
+
+runtime_guards:
+  agency:
+    on_violation:
+      severity: error
+      actions:
+        - interrupt_output
+        - reinsert_player_prompt
+        - log_event: agency_violation
+
+  narration:
+    mechanical_exposition:
+      severity: warn
+      actions:
+        - suppress_exposition
+        - rephrase_into_fiction
+        - log_event: mechanical_leak
+
+  latent_systems:
+    premature_exposure:
+      severity: error
+      actions:
+        - redact_output
+        - flag_session
+        - log_event: latent_exposure
+
+post_session_pipeline:
+  - run_lint: systems_lint.yaml
+  - run_red_team: systems_red_team_prompts.yaml
+  - generate_audit_report: true
+  - suggest_threshold_adjustments: true
+
+ide_integration:
+  editor_hints:
+    - warn_on_mechanical_language
+    - warn_on_player_action_inference
+  autofix_available: true
+  autofix_strategies:
+    - replace_decision_with_prompt
+    - remove_numeric_thresholds
+    - convert_rules_to_fiction
+
+failure_policy:
+  error_threshold: 1
+  warn_threshold: 3
+  on_error_threshold_exceeded:
+    - block_export
+    - require_human_review

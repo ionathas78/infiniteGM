@@ -1,0 +1,74 @@
+# session_audit.v0.4.yaml
+# Slice: Learning
+# Purpose: End-of-session UX audit + self-repair + attunement feedback.
+
+session_audit.v0.4:
+  enabled: true
+  runs: "end_of_session"
+
+  checks:
+    dialogue_boundary:
+      - id: "pc_speech_inferred_without_consent"
+        severity: "P0"
+      - id: "internal_thought_rendered_as_dialogue"
+        severity: "P0"
+      - id: "second_person_drift_misapplied"
+        severity: "P1"
+
+    decision_agency:
+      - id: "false_decision_points_logged"
+        severity: "P0"
+      - id: "autorun_action_taken_when_player_active"
+        severity: "P0"
+      - id: "intent_inferred_in_high_stakes_without_prompt"
+        severity: "P0"
+
+    ux_alignment:
+      - id: "clarification_requests_clustered"
+        severity: "P1"
+      - id: "option_recap_requests_repeated"
+        severity: "P1"
+      - id: "stress_spike_followed_by_wrong_recovery_style"
+        severity: "P1"
+      - id: "ambient_reference_rejected"
+        severity: "P1"
+
+  outputs:
+    log_events:
+      - "attunement_audit_summary"
+      - "attunement_delta_applied"
+
+  auto_fixes:
+    - when: { check: "pc_speech_inferred_without_consent", count_gt: 0 }
+      do:
+        - set: { key: "runtime.dialogue_guard.strictness", op: "inc", by: 1 }
+        - note: "Tighten Dialogue Guard one notch."
+
+    - when: { check: "autorun_action_taken_when_player_active", count_gt: 0 }
+      do:
+        - set: { key: "runtime.agency_guard.strictness", op: "inc", by: 1 }
+        - note: "Tighten Agency Guard one notch."
+
+    - when: { check: "clarification_requests_clustered", count_gt: 1 }
+      do:
+        - bias: { player_attunement.floats.friction.clarification_preference: +0.06 }
+        - bandit: { id: "recap_strategy", reward_arm: "short", weight: 1.0 }
+
+    - when: { check: "option_recap_requests_repeated", count_gt: 1 }
+      do:
+        - bias: { player_attunement.floats.friction.option_density_preference: -0.04 }
+        - bandit: { id: "option_framing", reward_arm: "open_prompt", weight: 0.6 }
+        - bandit: { id: "option_framing", reward_arm: "short_menu",  weight: 0.4 }
+
+    - when: { check: "ambient_reference_rejected", count_gt: 0 }
+      do:
+        - beta: { key: "ambient.weather_callouts_ok", update: "negative", weight: 1.0 }
+        - xflag: { schema: "sx.v1", bit: 0, action: "disable_next_sessions", sessions: 3 }
+        - note: "Pause weather callouts for a few sessions."
+
+  change_point_actions:
+    - when: { detector: "clarifications_ph", fired: true }
+      do:
+        - set: { key: "runtime.learning_rate_multiplier", value: 1.5, ttl_sessions: 3 }
+        - xflag: { schema: "sx.v1", bit: 5, action: "enable", ttl_sessions: 3 }
+        - note: "Shift detected: hedging + faster learning temporarily."

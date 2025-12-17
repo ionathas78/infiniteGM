@@ -1,0 +1,109 @@
+# Slice 3 — Death & Absence Rules
+# Version: Cast.DeathAbsence.v1.0
+# Detailed handling for disappearance, death confirmation, and consequence propagation
+
+cast_death_absence:
+  version: Cast.DeathAbsence.v1.0
+  description: >
+    Extended rules for handling NPC absence and death.
+    Focus: consequence propagation, uncertainty management, and continuity hooks.
+    Death is never a simple deletion; it changes the world.
+
+  states:
+    alive:
+      definition: "Entity is present and capable of agency."
+    missing:
+      definition: "Entity is absent; fate unknown to observers."
+      allowed_causes:
+        - fled
+        - captured
+        - hospitalized
+        - hiding
+        - displaced
+    dead:
+      definition: "Entity is confirmed dead within the fiction."
+      confirmation_levels:
+        - body_seen
+        - credible_witness
+        - official_record
+        - magical_or_technical_verification
+    unknown:
+      definition: "Conflicting reports; truth obscured or contested."
+
+  confirmation_protocol:
+    principles:
+      - "Prefer uncertainty unless confirmation is narratively earned."
+      - "Do not retroactively confirm death to solve plot problems."
+      - "Confirmation level should match setting technology/magic."
+    default_by_importance:
+      background: "credible_witness"
+      midground: "credible_witness | official_record"
+      foreground: "body_seen | verification (unless strong genre reasons)"
+
+  absence_handling:
+    missing_state_behaviors:
+      rumor_generation: true
+      relationship_vacuum: true
+      replacement_pressure: true
+    timeline_rules:
+      - "Missing status persists until resolved by evidence or event."
+      - "Long absence increases chance of status drift (missing→dead or missing→alive return), but never auto-resolves without an in-fiction trigger."
+
+  consequence_propagation:
+    propagation_channels:
+      relationships:
+        effects:
+          - grief
+          - opportunism
+          - fear
+          - revenge
+          - relief
+        note: >
+          Reactions depend on relationship tags and behavioral overlays.
+      factions:
+        effects:
+          - leadership_vacuum
+          - policy_shift
+          - retaliatory_action
+          - consolidation
+          - scapegoating
+      economy_and_services:
+        effects:
+          - shortage_of_skill
+          - price_shifts
+          - delayed_projects
+      rumor_and_information:
+        effects:
+          - misinformation_bloom
+          - competing_narratives
+          - investigative_hooks
+
+    intensity_scaling:
+      by_importance:
+        background: "local ripple"
+        midground: "district ripple"
+        foreground: "regional ripple"
+      by_visibility:
+        private: "quiet consequences"
+        public: "loud consequences"
+
+  continuity_hooks:
+    for_missing:
+      - "return with changed goals or scars"
+      - "leave behind traces (letters, debts, favors, unfinished work)"
+      - "become a contested symbol in rumors"
+    for_dead:
+      - "inheritance (items, secrets, debts)"
+      - "martyrdom or cautionary tale"
+      - "vengeance web (who blames whom)"
+      - "institutional reaction (investigation, cover-up, purge)"
+
+  safeguards:
+    - "Never use death/absence to override player agency."
+    - "Never resurrect or retcon without an in-fiction mechanism."
+    - "Avoid attrition deaths by accident; death should be thematically or choice-linked."
+
+  usage_notes:
+    - "When an NPC dies, immediately update: relationships, factions, and rumor state."
+    - "When an NPC goes missing, seed 1–2 deniable clues rather than certainty."
+    - "Treat confirmation as a resource: spending it changes the campaign tone."

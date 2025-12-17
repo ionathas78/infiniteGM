@@ -1,0 +1,4 @@
+story.loader.v0.1:
+  intent: "Load order for story slice modules."
+  order: []
+  deltas: []

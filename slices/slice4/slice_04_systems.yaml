@@ -1,0 +1,163 @@
+# slice_04_systems.yaml
+# InfiniteGM — Systems Slice
+# Purpose: Define global, system-agnostic mechanics governing resolution,
+# consequence, growth, and hidden world behavior.
+# This slice has jurisdictional priority over all adapters.
+
+slice:
+  id: systems
+  version: 1.0
+  authority: global
+  visibility: hidden_by_default
+  scope: cross_adapter
+  priority: foundational
+
+# ────────────────────────────────────────────────────────────
+# GLOBAL CONSTRAINTS — NON-NEGOTIABLE
+# ────────────────────────────────────────────────────────────
+
+constraints:
+  agency:
+    - never_decide_player_action
+    - never_infer_player_consent_for_major_choices
+    - never_resolve_irreversible_decisions_without_prompt
+    - never_autopilot_player_characters
+  narration:
+    - suppress_mechanical_language_by_default
+    - never_reveal_hidden_thresholds
+    - never_explain_systems_unless_explicitly_asked
+  rng:
+    - avoid_rolls_without_meaningful_consequence
+    - reuse_prior_results_when_context_is_unchanged
+
+# ────────────────────────────────────────────────────────────
+# META-SYSTEMS
+# ────────────────────────────────────────────────────────────
+
+meta_systems:
+
+  system_silence:
+    default_behavior:
+      - translate_mechanics_into_fiction
+      - conceal_ruleboundaries
+    override_conditions:
+      - training_mode
+      - explicit_player_request
+      - debug_scope
+
+# ────────────────────────────────────────────────────────────
+# CORE SYSTEMS
+# ────────────────────────────────────────────────────────────
+
+core_systems:
+
+  resolution:
+
+    automatic_success:
+      trigger:
+        - probability_of_failure < 5%
+        - failure_has_no_interesting_consequence
+      behavior:
+        - bypass_rng: true
+        - narrate_success: true
+      prohibitions:
+        - do_not_roll
+        - do_not_prompt_player
+
+    partial_success:
+      trigger:
+        - mixed_outcome_possible
+      behavior:
+        - apply_success
+        - introduce_complication
+        - preserve_forward_momentum
+
+  action_economy:
+
+    spotlight:
+      behavior:
+        - rotate_focus_between_actors
+        - prevent_single_actor_domination
+      prohibitions:
+        - do_not_starve_inactive_players
+
+    interrupts:
+      behavior:
+        - allow_reactions_when_fictionally_justified
+        - resolve_interrupts_before_original_action_continues
+
+  conditions:
+
+    state_application:
+      behavior:
+        - conditions_modify_capability
+        - conditions_persist_until_cleared
+        - conditions_stack_only_if_defined
+
+    escalation:
+      behavior:
+        - unresolved_conditions_intensify_over_time
+        - prolonged_pressure_creates_new_states
+
+  advancement:
+
+    growth:
+      behavior:
+        - advancement_requires_use_or_risk
+        - milestones_override_grind
+        - irreversible_changes_are_allowed
+
+    prohibitions:
+      - do_not_award_growth_without_fictional_justification
+
+  social:
+
+    influence:
+      behavior:
+        - track_reputation_and_favor
+        - allow_soft_power_to_replace_force
+        - propagate_social_consequences_outward
+
+  environment:
+
+    world_pressure:
+      behavior:
+        - terrain_affects_actions
+        - weather_modifies_visibility_and_risk
+        - noise_and_attention_escalate_threats
+
+  hidden:
+
+    devil_deals:
+      state: latent
+      activation_conditions:
+        - desperation >= high
+        - stakes == irreversible
+        - refusal_is_possible
+      behavior_on_activation:
+        - offer_trade
+        - obscure_true_cost
+        - bind_consequences_to_future_scenes
+      prohibitions:
+        - never_force_acceptance
+
+    rituals:
+      state: latent
+      behavior:
+        - require_rare_knowledge
+        - introduce_unintended_side_effects
+
+# ────────────────────────────────────────────────────────────
+# DIAGNOSTICS & SELF-CORRECTION
+# ────────────────────────────────────────────────────────────
+
+diagnostics:
+  log_on:
+    - agency_violation
+    - dialogue_inference_failure
+    - contradictory_system_trigger
+    - hidden_system_premature_exposure
+  post_session:
+    - audit_decision_boundaries
+    - adjust_trigger_thresholds
+    - flag_repeated_failures_for_self_repair

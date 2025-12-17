@@ -1,0 +1,174 @@
+unlock_state.v1.0
+module: slice_07_learning
+description: >
+  Tracks discovered, partially satisfied, suppressed, and unlocked techniques,
+  permissions, and advanced maneuvers. Unlocks are never purely numeric; they
+  require competence, style consistency, and temperament compatibility.
+  This file records readiness, not entitlement.
+
+version:
+  major: 1
+  minor: 0
+  patch: 0
+  last_updated: 2025-12-17
+
+policy:
+  authoritative: true
+  announce_on_unlock: false
+  foreshadow_only: true
+  retroactive_edits: false
+
+schema:
+  unlock:
+    id: "unlock:<slug>"
+    entity_ref: "pc:<id> | npc:<id>"
+    label: "Name of technique / permission"
+    description: "What this unlock enables in play"
+    domain: "combat | social | exploration | craft | occult | general"
+    state: "unknown | discovered | partial | suppressed | unlocked"
+    discovered_on: "ISO8601Z | null"
+    unlocked_on: "ISO8601Z | null"
+    requirements:
+      competence:
+        metric: "adapter_defined"
+        threshold: "adapter_defined"
+        met: false
+      style:
+        pattern: "descriptive style tag"
+        consistency_required: true
+        met: false
+      temperament:
+        compatible: ["bold","cautious","stubborn","anxious","empathic"]
+        met: false
+    suppression:
+      reason: "wrong_style | wrong_temperament | narrative_block | none"
+      notes: "Free text"
+    hooks:
+      mechanics:
+        grants:
+          - "permission:<id>"
+          - "technique:<id>"
+        modifies: []
+      narrative:
+        cues:
+          - "NPC reactions subtly shift"
+          - "situations feel momentarily slower"
+    provenance:
+      from_entries: ["learn:<uuid>"]
+      confidence: 0.0   # 0..1
+
+# -------------------------------------------------------------------
+# UNLOCKS
+# -------------------------------------------------------------------
+
+unlocks:
+
+  - id: "unlock:counter_window_1"
+    entity_ref: "pc:example_protagonist"
+    label: "Counter Window"
+    description: >
+      Can intentionally delay action to exploit an opponent’s commitment,
+      gaining a decisive counter opportunity.
+    domain: "combat"
+    state: "partial"
+    discovered_on: "2025-12-17T06:00:00Z"
+    unlocked_on: null
+    requirements:
+      competence:
+        metric: "successful_defensive_exchanges"
+        threshold: 3
+        met: true
+      style:
+        pattern: "waits_for_commitment"
+        consistency_required: true
+        met: true
+      temperament:
+        compatible: ["cautious","empathic"]
+        met: true
+    suppression:
+      reason: "none"
+      notes: ""
+    hooks:
+      mechanics:
+        grants:
+          - "technique:counter_window_basic"
+        modifies: []
+      narrative:
+        cues:
+          - "Opponents grow hesitant when overextending."
+    provenance:
+      from_entries:
+        - "learn:00000000-0000-0000-0000-000000000003"
+      confidence: 0.65
+
+  - id: "unlock:intimidating_silence"
+    entity_ref: "pc:example_protagonist"
+    label: "Intimidating Silence"
+    description: >
+      Silence itself becomes pressure, forcing others to fill the void or reveal
+      weakness.
+    domain: "social"
+    state: "suppressed"
+    discovered_on: "2025-12-17T06:00:00Z"
+    unlocked_on: null
+    requirements:
+      competence:
+        metric: "successful_social_standoffs"
+        threshold: 2
+        met: true
+      style:
+        pattern: "uses_silence_deliberately"
+        consistency_required: true
+        met: false
+      temperament:
+        compatible: ["bold","stubborn"]
+        met: false
+    suppression:
+      reason: "wrong_style"
+      notes: "Character fills silence with reassurance instead of pressure."
+    hooks:
+      mechanics:
+        grants:
+          - "permission:silence_as_pressure"
+        modifies: []
+      narrative:
+        cues:
+          - "Others misread silence as uncertainty."
+    provenance:
+      from_entries:
+        - "learn:00000000-0000-0000-0000-000000000001"
+      confidence: 0.4
+
+  # Template
+  - id: "unlock:<new_unlock_id>"
+    entity_ref: "pc:<your_pc_id_here>"
+    label: "<Name>"
+    description: "<Description>"
+    domain: "general"
+    state: "unknown"
+    discovered_on: null
+    unlocked_on: null
+    requirements:
+      competence:
+        metric: "<metric>"
+        threshold: "<value>"
+        met: false
+      style:
+        pattern: "<style>"
+        consistency_required: true
+        met: false
+      temperament:
+        compatible: []
+        met: false
+    suppression:
+      reason: "none"
+      notes: ""
+    hooks:
+      mechanics:
+        grants: []
+        modifies: []
+      narrative:
+        cues: []
+    provenance:
+      from_entries: []
+      confidence: 0.0

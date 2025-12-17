@@ -1,0 +1,65 @@
+# world.canon.yaml
+# Slice 2 — World Canon
+# Purpose: Define immutable facts of the world that do not change through play.
+
+world_canon:
+  id: canon_core
+  version: 1.0
+  status: canonical
+  mutability: immutable
+
+  physical_reality:
+    planet_type: terrestrial
+    gravity: standard
+    atmosphere: breathable
+    axial_tilt: mild
+    natural_laws:
+      - cause_precedes_effect
+      - matter_conserved
+      - entropy_increases
+
+  cosmology:
+    planes:
+      count: 1
+      description: >
+        A single, continuous reality. No confirmed alternate planes,
+        though myths and speculative theories persist.
+    afterlife:
+      verified: false
+      cultural_beliefs: many
+
+  magic_and_technology:
+    magic:
+      exists: true
+      source: unknown
+      limitations:
+        - cannot_create_matter
+        - requires_exertion_or_cost
+        - leaves_residue
+    technology:
+      ceiling: pre_industrial
+      exceptions: rare_artifacts
+
+  geography:
+    continents:
+      - id: heartland
+        climate: temperate
+        dominant_features: [rivers, plains, low_hills]
+
+  cultural_constants:
+    communication: spoken_and_written_language
+    travel:
+      fastest_common: horseback
+      rare_fast_travel: magical_or_artifact_based
+
+  historical_epochs:
+    - id: age_of_founding
+      status: ended
+      summary: >
+        The era in which major settlements and power structures
+        first took recognizable form.
+    - id: age_of_fracture
+      status: ended
+      summary: >
+        A period of conflict and collapse whose consequences
+        still shape modern politics.

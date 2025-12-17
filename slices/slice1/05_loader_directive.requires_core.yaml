@@ -1,0 +1,16 @@
+# infiniteGM Loader Directive — Core Requirement
+# Attach this block to any slice/module root to declare compatibility.
+
+requires:
+  core:
+    name: infiniteGM_core
+    version:
+      min: 1.0.0
+      max: null
+    compliance:
+      must_validate_schema: true
+      must_not_override_silently: true
+      must_log_exceptions: true
+
+load_order_hint:
+  before: ["*"]

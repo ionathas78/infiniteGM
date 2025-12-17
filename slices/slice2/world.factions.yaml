@@ -1,0 +1,80 @@
+# world.factions.yaml
+# Slice 2 — World Factions
+# Purpose: Define organized powers, their motives, resources, and relationships.
+
+world_factions:
+  id: factions_core
+  version: 1.0
+  status: canonical
+
+  factions:
+    - id: river_guild
+      kind: guild
+      influence_scope: regional
+      home_region: north_vale
+      goals:
+        - control_river_trade
+        - stabilize_salt_supply
+      fears:
+        - loss_of_toll_rights
+        - rival_caravans
+      resources:
+        - boats
+        - warehouses
+        - accountants
+      methods:
+        - tariffs
+        - contracts
+        - quiet_pressure
+      relationships:
+        allies: [terhaven_council]
+        rivals: [free_caravans]
+
+    - id: free_caravans
+      kind: consortium
+      influence_scope: local_to_regional
+      home_region: north_vale
+      goals:
+        - bypass_guild_tolls
+        - expand_overland_routes
+      fears:
+        - confiscation
+        - guild_sanctions
+      resources:
+        - wagons
+        - scouts
+        - hired_guards
+      methods:
+        - alternate_routes
+        - bribes
+        - speed
+      relationships:
+        allies: [stonecross]
+        rivals: [river_guild]
+
+    - id: terhaven_council
+      kind: civic_authority
+      influence_scope: city
+      home_settlement: terhaven
+      goals:
+        - keep_trade_flowing
+        - prevent_unrest
+      fears:
+        - riots
+        - external_intervention
+      resources:
+        - city_guard
+        - legal_authority
+      methods:
+        - decrees
+        - mediation
+        - selective_enforcement
+      relationships:
+        allies: [river_guild]
+        rivals: []
+
+  design_notes:
+    guidance: >
+      Factions do not have scripted plans here.
+      They respond according to goals, fears, and resources
+      when pressure is applied.

@@ -1,0 +1,21 @@
+tooling.xflags.encode_decode.contract.v0.1:
+  intent: "Contract for encoding/decoding sx_delta and applying diffs safely."
+  functions:
+    encode_diff:
+      in:
+        base: "canonical campaign settings snapshot"
+        overrides: "session overrides"
+        schema_id: "sx.v1"
+      out:
+        sx_delta: "hex string"
+    decode_to_overrides:
+      in:
+        sx_delta: "hex string"
+        schema_id: "sx.v1"
+      out:
+        overrides: "object of keys -> values"
+    apply_diff:
+      rules:
+        - "unset bits imply no override"
+        - "forbid_precision always enforced"
+        - "enums override only if the enum range is explicitly set in diff"

@@ -1,0 +1,148 @@
+# world.contract.yaml
+# Slice 2 — World
+# Purpose: Define the authority, scope, and behavioral rules
+# governing the World slice for this project.
+
+world_contract:
+  id: slice_2_world
+  version: 1.0
+  status: canonical
+  authority: highest   # overrides narrative improvisation
+
+  description: >
+    This contract defines what exists independently of player action.
+    It establishes immutable facts, mutable state, and the rules
+    governing invention, disclosure, and change.
+
+  scope:
+    includes:
+      - physical_reality
+      - places
+      - factions
+      - history
+      - time
+      - world_constraints
+    excludes:
+      - player_characters
+      - moment_to_moment narration
+      - encounter resolution
+      - scene framing
+
+  structural_model:
+    canon: immutable
+    state: mutable
+    separation_enforced: true
+
+  ingestion_rules:
+    load_order:
+      - world.contract
+      - world.canon
+      - world.constraints
+      - world.places
+      - world.factions
+      - world.state
+
+    precedence:
+      canon_over_state: true
+      constraints_over_narrative: true
+      state_over_assumption: true
+
+  invention_policy:
+    allowed:
+      - local_detail_expansion
+      - connective_tissue_between_known_elements
+      - rumors_and_uncertain_accounts
+    restricted:
+      - new_continents
+      - new_factions_with_global_reach
+      - new_cosmic_rules
+    forbidden:
+      - contradicting canon
+      - bypassing constraints
+      - resolving open clocks without cause
+
+  fallback_behavior:
+    unknown_fact:
+      action: leave_ambiguous
+      preferred_forms: [rumor, disputed_account, partial_record]
+
+    unknown_place:
+      action: derive_from_known
+      rules:
+        - must border an existing region
+        - must inherit climate and travel logic
+
+    unknown_actor:
+      action: affiliate
+      rules:
+        - tie to an existing faction
+        - or establish as unaffiliated local power
+
+  visibility_model:
+    visibility_levels:
+      - gm_only
+      - player_known
+      - discoverable
+      - mythic
+
+    disclosure_rules:
+      gm_only:
+        may_be_used_for: internal_reasoning
+        may_be_spoken: false
+
+      player_known:
+        may_be_spoken: true
+        may_be_assumed_by_players: true
+
+      discoverable:
+        may_be_hintable: true
+        requires_in_world_discovery: true
+
+      mythic:
+        may_be_spoken_as: legend_or_belief
+        truth_status: unverified
+
+  temporal_rules:
+    time_advances_by_default: true
+    idle_time_progression: allowed
+    paused_time:
+      allowed_only_during:
+        - meta_discussion
+        - rules_clarification
+
+  world_reactivity:
+    reacts_to_player_action: true
+    reacts_to_inaction: true
+    reaction_latency:
+      immediate: local_effects
+      delayed: factional_or_regional_effects
+
+  consistency_enforcement:
+    prioritize:
+      - geography
+      - power_structures
+      - constraints
+      - established_history
+    on_conflict:
+      action: defer_to_existing_world_state
+      note: "Retcon only as last resort"
+
+  error_handling:
+    hallucination_guard:
+      rule: prefer omission over invention
+      guidance: "Silence is better than false certainty"
+
+    contradiction_response:
+      action: flag_and_resolve_internally
+      player_facing_explanation: narrative_uncertainty
+
+  design_intent:
+    guiding_principle: >
+      The world exists even when the players are not present.
+      Player action reveals, alters, or wounds it,
+      but does not define it by default.
+
+    anti_pattern_warnings:
+      - do_not_treat_world_as_backdrop
+      - do_not_reset_state_between_scenes
+      - do_not_optimize_world_for_player_convenience

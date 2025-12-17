@@ -1,0 +1,109 @@
+# player_attunement.v0.1.yaml
+# Slice: Learning
+# Purpose: Player experience attunement + learning state (decaying, coarse, ethical)
+
+player_attunement.v0.1:
+  enabled: true
+  privacy_mode: "coarse"   # coarse|strict
+  retention:
+    max_sessions: 30
+    decay_half_life_sessions: 10
+
+  # Hex header for stable booleans/enums (fast gates); nuance lives below.
+  prefs_mask:
+    schema: "prefs_mask.v1"
+    value: "0x0000_0000_0000_0000"
+    notes_ref: "note:xflags:prefs_mask.v1:key"
+
+  priors:
+    default_float_prior: 0.5
+    beta_prior: { a: 2.0, b: 2.0 }
+
+  floats:  # EWMA + decay-to-prior (0..1)
+    friction:
+      ambiguity_tolerance: { p: 0.50, last_session: 0 }
+      clarification_preference: { p: 0.50, last_session: 0 }
+      option_density_preference: { p: 0.50, last_session: 0 }
+    pacing:
+      prefers_brisk: { p: 0.50, last_session: 0 }
+      reflection_appetite: { p: 0.50, last_session: 0 }
+    agency:
+      surprise_tolerance: { p: 0.50, last_session: 0 }
+      control_preference: { p: 0.50, last_session: 0 }
+    recovery:
+      stress_spike_sensitivity: { p: 0.50, last_session: 0 }
+    meta_visibility:
+      gear_tolerance: { p: 0.50, last_session: 0 }
+
+  beta:    # (a,b) posteriors for binary-ish “should we do X?”
+    ambient.weather_callouts_ok: { a: 2.0, b: 2.0 }
+    ambient.time_callouts_ok: { a: 2.0, b: 2.0 }
+    meta.character_lens_ok: { a: 2.0, b: 2.0 }
+    meta.gear_visibility_ok: { a: 2.0, b: 2.0 }
+    convo.allow_resume: { a: 2.0, b: 2.0 }
+
+  enums:   # small categorical prefs (kept human-readable; may be mirrored into flags)
+    recovery:
+      after_stress: "unknown"  # levity|mastery|reassurance|quiet|distraction|unknown
+    convo:
+      continuity_default: "fresh"  # fresh|resume
+
+  bandits: # Thompson Sampling, each arm = Beta(a,b)
+    recap_strategy:
+      desc: "How much recap to provide when the scene is in motion."
+      arms:
+        none:  { a: 2.0, b: 2.0 }
+        short: { a: 2.0, b: 2.0 }
+        full:  { a: 2.0, b: 2.0 }
+    option_framing:
+      desc: "How to present player choices."
+      arms:
+        open_prompt: { a: 2.0, b: 2.0 }   # “What do you do?”
+        short_menu:  { a: 2.0, b: 2.0 }   # 2–3 bullets
+        dense_menu:  { a: 2.0, b: 2.0 }   # 4–6 bullets
+    recovery_response:
+      desc: "Support style after stress spike."
+      arms:
+        levity:       { a: 2.0, b: 2.0 }
+        mastery:      { a: 2.0, b: 2.0 }
+        reassurance:  { a: 2.0, b: 2.0 }
+        quiet:        { a: 2.0, b: 2.0 }
+        distraction:  { a: 2.0, b: 2.0 }
+
+  change_points:  # Page–Hinkley (or CUSUM) lightweight detectors
+    clarifications_ph:
+      enabled: true
+      delta: 0.005
+      lambda: 0.05
+      mean: 0.0
+      cumulative: 0.0
+      min_cumulative: 0.0
+    agency_corrections_ph:
+      enabled: true
+      delta: 0.002
+      lambda: 0.03
+      mean: 0.0
+      cumulative: 0.0
+      min_cumulative: 0.0
+    stress_spikes_ph:
+      enabled: true
+      delta: 0.003
+      lambda: 0.04
+      mean: 0.0
+      cumulative: 0.0
+      min_cumulative: 0.0
+
+  utility: # coarse shared north-star score
+    weights:
+      delight: 1
+      flow: 1
+      friction: -1
+      confusion: -1
+      agency_violations: -2
+      stress_misread: -1
+
+  entropy_gates:
+    beta_commit_threshold_n: 12   # commit only when (a+b) >= this
+    hedge_entropy_threshold: 0.66 # high entropy => hedge mode (binary prefs near 0.5)
+
+  history: []

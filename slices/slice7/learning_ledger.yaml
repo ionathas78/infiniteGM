@@ -1,0 +1,180 @@
+learning_ledger.v1.0
+module: slice_07_learning
+description: >
+  Append-only ledger of learning events per entity (PC/NPC). This file records
+  what mattered: near-misses, costly successes, repeated failures, emergent skill
+  texture, scars formed/cleared, and unlock progression signals.
+  Do not rewrite history: resolve forward with new entries.
+
+version:
+  major: 1
+  minor: 0
+  patch: 0
+  last_updated: 2025-12-17
+
+policy:
+  append_only: true
+  corrections:
+    allowed: true
+    method: "supersede"   # create a new entry that references the prior entry_id
+  visibility_defaults:
+    audience: gm_only     # change per project preferences
+  player_vs_character_firewall:
+    enabled: true
+    notes: "Entries record character-facing learning only; player meta-knowledge is not logged as character learning."
+
+schema:
+  entry:
+    id: "learn:<uuid>"
+    ts: "ISO8601Z"
+    entity_ref: "pc:<id> | npc:<id>"
+    scene_ref: "scene:<id> | null"
+    event_type: >
+      one of:
+      - near_miss
+      - costly_success
+      - repeated_failure
+      - instruction
+      - scar_formed
+      - scar_cleared
+      - habit_seed
+      - habit_declared
+      - unlock_signal
+      - unlock_unlocked
+      - texture_added
+      - texture_refined
+      - insight_memory
+      - correction
+    domain: "combat | social | exploration | craft | occult | general"
+    trigger:
+      summary: "what happened in-world"
+      roll_ref: "roll:<id> | null"
+      stakes: "what was at risk"
+    temperament_context:
+      temperament: "bold|cautious|stubborn|anxious|empathic|unknown"
+      modifiers_applied: ["learning_rate:+0.25", "scar_weight:+0.25"]
+    learning_effect:
+      kind: "instruction|scar|habit|unlock|texture|memory|none"
+      magnitude: "tiny|small|medium|large"
+      tags: ["tag1","tag2"]
+      mechanics:
+        # Optional structured hooks; adapters may extend
+        advantage_next_time: false
+        penalty_trigger: null
+        condition_link: null
+        unlock_key: null
+        texture_key: null
+    resolution:
+      status: "open|resolved|superseded"
+      resolves_entry_id: "learn:<uuid> | null"
+      notes: "free text"
+    provenance:
+      source_slice: "slice_07_learning"
+      related_slices: ["slice_04_systems","slice_06_meta"]
+      confidence: 0.0   # 0..1 (how certain the system is that this is true character-learning)
+
+# -------------------------------------------------------------------
+# LEDGER
+# -------------------------------------------------------------------
+
+ledger:
+  # Example entity: replace pc:natsuo_fujii with your actual ids
+  - entity_ref: "pc:example_protagonist"
+    entries:
+
+      - id: "learn:00000000-0000-0000-0000-000000000001"
+        ts: "2025-12-17T06:00:00Z"
+        scene_ref: "scene:example_01"
+        event_type: "near_miss"
+        domain: "social"
+        trigger:
+          summary: "Nearly blurted a secret under pressure; caught it at the last second."
+          roll_ref: "roll:example_willpower_01"
+          stakes: "reputation and trust with a key NPC"
+        temperament_context:
+          temperament: "anxious"
+          modifiers_applied: ["learning_rate:+0.10", "scar_weight:+0.25"]
+        learning_effect:
+          kind: "instruction"
+          magnitude: "small"
+          tags: ["impulse_control","secret_keeping","pressure"]
+          mechanics:
+            advantage_next_time: true
+            penalty_trigger: null
+            condition_link: null
+            unlock_key: null
+            texture_key: "texture:composure_under_scrutiny"
+        resolution:
+          status: "open"
+          resolves_entry_id: null
+          notes: "Foreshadow only. Do not announce as a new capability."
+        provenance:
+          source_slice: "slice_07_learning"
+          related_slices: ["slice_04_systems"]
+          confidence: 0.7
+
+      - id: "learn:00000000-0000-0000-0000-000000000002"
+        ts: "2025-12-17T06:00:00Z"
+        scene_ref: "scene:example_02"
+        event_type: "repeated_failure"
+        domain: "exploration"
+        trigger:
+          summary: "Misread a simple landmark twice; got turned around in familiar streets."
+          roll_ref: "roll:example_nav_02"
+          stakes: "time loss and exposure to being followed"
+        temperament_context:
+          temperament: "stubborn"
+          modifiers_applied: ["learning_rate:-0.40", "resistance_threshold:high"]
+        learning_effect:
+          kind: "scar"
+          magnitude: "tiny"
+          tags: ["orientation","ego_check"]
+          mechanics:
+            advantage_next_time: false
+            penalty_trigger: "when navigating while rushed or embarrassed"
+            condition_link: "cond:fatigue_1"
+            unlock_key: null
+            texture_key: null
+        resolution:
+          status: "open"
+          resolves_entry_id: null
+          notes: "Scar is mild; can decay after a safe success with guidance or calm conditions."
+        provenance:
+          source_slice: "slice_07_learning"
+          related_slices: ["slice_04_systems","slice_06_meta"]
+          confidence: 0.6
+
+      - id: "learn:00000000-0000-0000-0000-000000000003"
+        ts: "2025-12-17T06:00:00Z"
+        scene_ref: "scene:example_03"
+        event_type: "unlock_signal"
+        domain: "combat"
+        trigger:
+          summary: "Won a duel by timing counters three exchanges in a row instead of forcing offense."
+          roll_ref: "roll:example_combat_03"
+          stakes: "injury avoidance and social standing"
+        temperament_context:
+          temperament: "cautious"
+          modifiers_applied: ["learning_rate:-0.25", "retention_quality:high"]
+        learning_effect:
+          kind: "unlock"
+          magnitude: "small"
+          tags: ["counter_timing","read_and_respond"]
+          mechanics:
+            advantage_next_time: false
+            penalty_trigger: null
+            condition_link: null
+            unlock_key: "unlock:counter_window_1"
+            texture_key: null
+        resolution:
+          status: "open"
+          resolves_entry_id: null
+          notes: "Do not reveal unlock; allow it to become available when attempted in-fiction."
+        provenance:
+          source_slice: "slice_07_learning"
+          related_slices: ["slice_04_systems"]
+          confidence: 0.65
+
+  # Empty template for new entities
+  - entity_ref: "pc:<your_pc_id_here>"
+    entries: []

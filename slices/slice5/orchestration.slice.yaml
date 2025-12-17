@@ -1,0 +1,143 @@
+# ============================================================
+# infiniteGM — Slice 11: Orchestration
+# File: orchestration.slice.yaml
+# Purpose: Flow control, sequencing, and slice coordination
+# ============================================================
+
+orchestration_slice:
+  id: slice_11_orchestration
+  name: "Orchestration"
+  role: "Execution flow, sequencing, and cross-slice coordination"
+
+  description: >
+    Slice 11 governs when slices act and in what order.
+    It coordinates data flow, enforces sequencing rules,
+    manages pauses, and ensures the system advances
+    only when prerequisites are satisfied.
+
+  authority:
+    can:
+      - sequence_slice_execution
+      - manage_pauses_and_resumes
+      - enforce_prerequisites
+      - coordinate_state_handoffs
+      - signal_turn_boundaries
+    cannot:
+      - alter_slice_outputs
+      - invent_state
+      - bypass_governance
+      - advance_without_consent_when_required
+
+  # ------------------------------------------------------------
+  # Principles
+  # ------------------------------------------------------------
+
+  principles:
+    order_creates_meaning:
+      description: >
+        The same events feel different depending on order.
+      enforcement:
+        - "Respect canonical slice order."
+        - "Do not reorder for convenience."
+
+    pauses_are_power:
+      description: >
+        Strategic pauses protect agency and clarity.
+      enforcement:
+        - "Stop at decision points."
+        - "Never rush player choice."
+
+    no_skipped_steps:
+      description: >
+        Every phase earns its place.
+      enforcement:
+        - "All required slices must run or explicitly defer."
+        - "Deferral must be logged."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    execution_sequencing:
+      inputs:
+        - current_phase
+        - pending_triggers
+      outputs:
+        - next_slice_queue
+      constraints:
+        - "Follow declared slice order."
+        - "Honor conditional skips."
+
+    pause_management:
+      inputs:
+        - agency_requirements
+        - unresolved_questions
+      outputs:
+        - pause_state
+      constraints:
+        - "Pauses occur before irreversible change."
+        - "Resumes require explicit trigger."
+
+    state_handoff:
+      inputs:
+        - slice_outputs
+      outputs:
+        - normalized_state_bundle
+      constraints:
+        - "No data loss between slices."
+        - "Preserve provenance."
+
+    turn_boundary_signaling:
+      inputs:
+        - action_completion
+      outputs:
+        - boundary_marker
+      constraints:
+        - "Boundaries are explicit."
+        - "Never blur turns."
+
+  # ------------------------------------------------------------
+  # Orchestration Dials
+  # ------------------------------------------------------------
+
+  dials:
+    strict_ordering:
+      options: [flexible, standard, rigid]
+      default: standard
+
+    pause_frequency:
+      options: [low, normal, high]
+      default: normal
+
+    dial_change_rules:
+      - "Rigidity increases during high-stakes scenes."
+      - "Pause frequency increases when agency risk rises."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not auto-advance past decision points."
+    - "Do not collapse phases."
+    - "Do not hide pauses."
+    - "Do not merge slice responsibilities."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "Sequencing Integrity"
+      rule: "Slices execute in declared order."
+
+    - name: "Agency Gate"
+      rule: "No advancement without required consent."
+
+    - name: "State Continuity"
+      rule: "All outputs are carried forward intact."
+
+# ============================================================
+# End of Slice 11
+# ============================================================

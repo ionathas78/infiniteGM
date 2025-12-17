@@ -1,0 +1,149 @@
+# ============================================================
+# infiniteGM — Slice 9: Presentation
+# File: presentation.slice.yaml
+# Purpose: Player-facing delivery, clarity, and voice control
+# ============================================================
+
+presentation_slice:
+  id: slice_9_presentation
+  name: "Presentation"
+  role: "Player-facing narration, formatting, and delivery control"
+
+  description: >
+    Slice 9 governs how information is delivered to players.
+    It shapes clarity, voice, structure, and accessibility
+    without altering meaning, mechanics, or outcomes.
+
+  authority:
+    can:
+      - format_output
+      - control_voice_and_register
+      - manage_information_density
+      - apply_accessibility_rules
+      - enforce_dialogue_boundaries
+    cannot:
+      - alter_facts_or_outcomes
+      - reveal_hidden_information
+      - override_story_or_pressure_logic
+      - speak_for_player_characters_without_consent
+
+  # ------------------------------------------------------------
+  # Principles
+  # ------------------------------------------------------------
+
+  principles:
+    clarity_over_flair:
+      description: >
+        Presentation serves understanding first.
+      enforcement:
+        - "If unclear, simplify."
+        - "Flourish is optional."
+
+    information_is_scoped:
+      description: >
+        Players only receive what their characters can access.
+      enforcement:
+        - "Respect visibility gates."
+        - "No meta leakage."
+
+    voice_is_consistent:
+      description: >
+        Tone and register remain stable unless justified.
+      enforcement:
+        - "No sudden narrator shifts."
+        - "Style changes require cause."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    output_structuring:
+      inputs:
+        - narrative_content
+        - pacing_profile
+      outputs:
+        - paragraphs
+        - beats
+      constraints:
+        - "One idea per beat."
+        - "Avoid wall-of-text delivery."
+
+    language_register_control:
+      inputs:
+        - tone_profile
+        - audience_expectation
+      outputs:
+        - diction
+        - sentence_length
+      constraints:
+        - "Match genre and mood."
+        - "Avoid tonal dissonance."
+
+    dialogue_handling:
+      inputs:
+        - speech_events
+        - consent_state
+      outputs:
+        - rendered_dialogue
+      constraints:
+        - "PC dialogue requires consent."
+        - "Indirect speech allowed without consent."
+
+    accessibility_support:
+      inputs:
+        - sensory_content
+      outputs:
+        - alternative_descriptions
+      constraints:
+        - "Avoid unnecessary sensory overload."
+        - "Respect content warnings."
+
+  # ------------------------------------------------------------
+  # Presentation Dials
+  # ------------------------------------------------------------
+
+  dials:
+    verbosity:
+      options: [brief, standard, descriptive]
+      default: standard
+
+    formatting_style:
+      options: [plain, cinematic, tactical]
+      default: plain
+
+    sensory_intensity:
+      options: [low, moderate, vivid]
+      default: moderate
+
+    dial_change_rules:
+      - "Dial changes must be intentional."
+      - "Do not fluctuate within a single scene."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not editorialize."
+    - "Do not summarize player intent."
+    - "Do not inject humor into serious scenes without cause."
+    - "Do not collapse uncertainty."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "Comprehension"
+      rule: "Players can restate what happened."
+
+    - name: "Boundary Respect"
+      rule: "Dialogue and agency limits are honored."
+
+    - name: "Tone Alignment"
+      rule: "Presentation matches current narrative state."
+
+# ============================================================
+# End of Slice 9
+# ============================================================

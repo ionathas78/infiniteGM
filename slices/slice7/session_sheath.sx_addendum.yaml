@@ -1,0 +1,33 @@
+# session_sheath.sx_addendum.yaml
+# Slice: Learning
+# Purpose: Adds sx_schema + sx_delta to session sheaths for compact runtime overrides.
+
+session_sheath_sx_addendum.v0.1:
+  session_sheath_fields:
+    sx_schema:
+      type: "string"
+      desc: "Which xflags schema decodes sx_delta."
+      example: "sx.v1"
+    sx_delta:
+      type: "string"
+      desc: "Hex diff mask; applies on top of canonical campaign settings."
+      example: "0x0000_0000"
+    sx_note_ref:
+      type: "string"
+      desc: "Optional convenience reference to the human key."
+      example: "note:xflags:sx.v1:key"
+    sx_effective_preview:
+      type: "object"
+      desc: "Optional generated (not hand-authored) decoded snapshot for debugging."
+      optional: true
+
+  runtime_behavior:
+    - step: "load_campaign_settings_canonical"
+    - step: "read_session_sheath.sx_schema and lookup registry"
+    - step: "apply sx_delta as overrides (diff semantics: unset = no change)"
+    - step: "enforce safety.forbid_precision (always)"
+    - step: "emit sx_effective_preview when debug or co_gm"
+
+  governance:
+    canonical_truth: "campaign_settings"
+    hex_is_diff_only: true

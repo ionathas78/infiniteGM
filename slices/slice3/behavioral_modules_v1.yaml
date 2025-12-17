@@ -1,0 +1,110 @@
+# Slice 3 — Behavioral Modules
+# Version: Cast.Behavior.v1.0
+# Reusable behavioral overlays for NPC reasoning
+# These are tendencies, not scripts.
+
+behavioral_modules:
+  version: Cast.Behavior.v1.0
+  description: >
+    Modular behavioral tendencies applied to Cast entities.
+    Modules describe how NPCs tend to react under conditions.
+    They never dictate dialogue or outcomes.
+
+  modules:
+
+    reluctant_authority:
+      summary: "Holds power unwillingly; avoids overt dominance."
+      tendencies:
+        - avoids giving direct orders unless forced
+        - deflects responsibility upward or outward
+        - hesitates before exercising authority publicly
+      triggers:
+        - responsibility spotlighted
+        - authority challenged in public
+      stress_responses:
+        - delay decisions
+        - delegate imperfectly
+
+    reputation_sensitive:
+      summary: "Highly aware of social standing and rumor."
+      tendencies:
+        - tracks who witnesses interactions
+        - alters behavior when observed
+        - remembers public slights longer than private ones
+      triggers:
+        - crowds present
+        - gossip detected
+      stress_responses:
+        - overcorrect politeness
+        - retaliate indirectly
+
+    cornered_predator:
+      summary: "Dangerous when escape options narrow."
+      tendencies:
+        - avoids conflict while exits exist
+        - escalates rapidly when trapped
+        - targets perceived weakest opponent
+      triggers:
+        - loss of escape routes
+        - numerical disadvantage
+      stress_responses:
+        - sudden violence
+        - reckless gambits
+
+    charming_liar_low_skill:
+      summary: "Relies on charm to mask weak deception ability."
+      tendencies:
+        - overexplains simple matters
+        - uses humor to redirect scrutiny
+        - contradicts earlier statements subtly
+      triggers:
+        - pointed questioning
+        - factual inconsistencies exposed
+      stress_responses:
+        - escalate charm
+        - attempt to change subject
+
+    loyal_until_publicly_humiliated:
+      summary: "Faithful until honor is visibly damaged."
+      tendencies:
+        - defends allies privately
+        - tolerates private criticism
+        - reacts strongly to public disrespect
+      triggers:
+        - insults before witnesses
+        - symbolic loss of status
+      stress_responses:
+        - withdrawal of support
+        - open defiance
+
+    transactional_morality:
+      summary: "Ethics framed as exchanges rather than principles."
+      tendencies:
+        - weighs favors against risks
+        - reframes moral choices as deals
+        - avoids absolutes
+      triggers:
+        - requests without compensation
+        - asymmetric risk
+      stress_responses:
+        - renegotiate terms
+        - walk away
+
+    fear_driven_conservator:
+      summary: "Preserves status quo due to fear of loss."
+      tendencies:
+        - resists change initiatives
+        - exaggerates risks of action
+        - prefers known inefficiencies
+      triggers:
+        - proposed reforms
+        - unfamiliar actors
+      stress_responses:
+        - stall tactics
+        - appeal to tradition
+
+  usage_notes:
+    - "Attach modules via behavioral_overlays on an entity."
+    - "Multiple modules may apply simultaneously."
+    - "Conflicting modules create tension, not cancellation."
+    - "Modules guide reaction weighting, not fixed responses."

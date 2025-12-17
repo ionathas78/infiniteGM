@@ -1,0 +1,67 @@
+# world.constraints.yaml
+# Slice 2 — World Constraints
+# Purpose: Define hard and soft limits governing reality, magic, technology, and society.
+
+world_constraints:
+  id: constraints_core
+  version: 1.0
+  status: canonical
+
+  hard_constraints:
+    - id: matter_conservation
+      domain: physical
+      rule: matter_cannot_be_created_or_destroyed
+      consequence: entropy_debt
+      narrative_signal: heat_bleed_ash_residue
+
+    - id: causality
+      domain: temporal
+      rule: cause_must_precede_effect
+      consequence: paradox_instability
+      narrative_signal: memory_fog_event_overlap
+
+    - id: mortality
+      domain: biological
+      rule: death_is_final
+      exceptions: none_verified
+      narrative_signal: irreversible_loss
+
+  soft_constraints:
+    - id: magic_exertion
+      domain: magic
+      rule: magic_requires_cost
+      costs:
+        - fatigue
+        - material_components
+        - personal_risk
+      breakable: false
+      narrative_signal: physical_strain_visible
+
+    - id: technological_diffusion
+      domain: technology
+      rule: advanced_tech_is_rare_and_localized
+      breakable: true
+      cost: social_disruption
+      narrative_signal: suspicion_unrest
+
+    - id: social_order
+      domain: society
+      rule: actions_have_reputation_consequences
+      breakable: false
+      narrative_signal: changed_attitudes_access_denied
+
+  enforcement:
+    violation_response:
+      first: narrative_warning
+      repeated: escalating_costs
+      extreme: permanent_world_change
+
+    priority_order:
+      - hard_constraints
+      - soft_constraints
+      - cultural_norms
+
+  design_notes:
+    intent: >
+      Constraints exist to preserve coherence, not to punish creativity.
+      Breaking rules should generate story, not end it.

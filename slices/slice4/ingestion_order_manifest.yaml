@@ -1,0 +1,64 @@
+# ingestion_order_manifest.yaml
+# InfiniteGM — Systems Ingestion Order Manifest
+# Purpose: Define deterministic load order for Systems slice ingestion
+# to ensure authority, constraints, and behavior resolve correctly.
+
+ingestion_manifest:
+  id: systems_ingestion_order
+  version: 1.0
+  description: >
+    Establishes the required sequence for ingesting Systems-related files
+    so that jurisdiction, constraints, and latent behavior are respected.
+
+load_order:
+
+  - order: 1
+    file: systems_bootstrap.md
+    role: authority_declaration
+    rationale: >
+      Establishes jurisdictional priority and behavioral posture
+      before any mechanical detail is introduced.
+
+  - order: 2
+    file: slice_04_systems.yaml
+    role: core_systems_definition
+    rationale: >
+      Defines global constraints, meta-systems, and canonical system behavior.
+
+  - order: 3
+    file: systems_active.yaml
+    role: always_on_systems
+    rationale: >
+      Loads continuously operating systems as baseline physics.
+
+  - order: 4
+    file: systems_latent.yaml
+    role: dormant_systems
+    rationale: >
+      Registers possible-but-hidden systems without activating or exposing them.
+
+  - order: 5
+    file: systems_lint.yaml
+    role: compliance_and_self_correction
+    rationale: >
+      Enables validation, auditing, and auto-repair after behavior is live.
+
+rules:
+  - never_skip_order: true
+  - never_merge_files_during_ingest: true
+  - later_files_may_not_override_constraints: true
+
+failure_modes:
+  - missing_bootstrap:
+      effect: undefined_authority
+      mitigation: abort_ingestion
+  - constraints_loaded_after_systems:
+      effect: agency_risk
+      mitigation: reorder_and_reload
+  - latent_loaded_as_active:
+      effect: mystery_corruption
+      mitigation: quarantine_and_flag
+
+verification:
+  checksum_required: true
+  manifest_ack_required: internal_only

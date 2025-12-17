@@ -1,0 +1,16 @@
+# systems_latent.yaml
+# InfiniteGM — Latent Systems
+# Purpose: Systems that may or may not exist in a given world and remain hidden until activated.
+
+systems_latent:
+  devil_deals:
+    default_state: dormant
+    discoverable: false
+
+  rituals:
+    default_state: dormant
+    discoverable: false
+
+  summoning:
+    default_state: dormant
+    discoverable: false

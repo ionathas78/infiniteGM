@@ -1,0 +1,94 @@
+learning_directives.v1.0
+module: slice_07_learning
+description: >
+  Authoritative rules governing how characters learn through play.
+  Defines learning rates, temperament weighting, failure outcomes,
+  habit ignition, scars, unlock eligibility, and decay rules.
+
+version:
+  major: 1
+  minor: 0
+  patch: 0
+  last_updated: 2025-12-16
+
+principles:
+  agency_first: true
+  no_instant_mastery: true
+  learning_is_irreversible_by_default: true
+  scars_are_not_punishments: true
+  unlocks_should_be_felt_before_named: true
+
+temperament_modifiers:
+  bold:
+    learning_rate: 1.25
+    retention_quality: medium
+    mislearning_risk: low
+  cautious:
+    learning_rate: 0.75
+    retention_quality: high
+    mislearning_risk: very_low
+  stubborn:
+    learning_rate: 0.6
+    retention_quality: very_high
+    mislearning_risk: low
+    resistance_threshold: high
+  anxious:
+    learning_rate: 1.1
+    retention_quality: low
+    mislearning_risk: high
+    scar_bias: elevated
+  empathic:
+    learning_rate: 1.0
+    social_learning_bonus: 1.3
+
+failure_resolution:
+  branches:
+    instruction: { default_probability: 0.6 }
+    scar: { default_probability: 0.4 }
+  temperament_bias:
+    anxious: { scar_weight: +0.25 }
+    cautious: { instruction_weight: +0.15 }
+    bold: { instruction_weight: +0.10 }
+
+habit_rules:
+  base_repetition_threshold: 3
+  declaration_requires_consequence: true
+  temperament_adjustments:
+    bold: { threshold_modifier: -1 }
+    cautious: { threshold_modifier: +1 }
+    stubborn: { threshold_modifier: +2 }
+  replacement_costs:
+    base_cost: high
+
+scar_rules:
+  formation:
+    requires_emotional_spike: true
+    repeat_failures_accelerate: true
+  decay:
+    allowed: true
+    decay_requires_safe_success: true
+    default_decay_time: long
+  mutation:
+    scar_to_habit_allowed: true
+
+unlock_rules:
+  requirements:
+    - competence_threshold
+    - style_consistency
+    - temperament_compatibility
+  suppression:
+    wrong_style_blocks_unlock: true
+    wrong_temperament_delays_unlock: true
+  visibility:
+    announce_on_unlock: false
+    foreshadow_only: true
+
+knowledge_gating:
+  player_vs_character:
+    strict: true
+    temperament_filter: true
+
+integrations:
+  slice_04_systems: uses_failure_outcomes
+  slice_06_meta: logs_learning_anomalies
+  slice_03_cast: reads_temperament_profiles

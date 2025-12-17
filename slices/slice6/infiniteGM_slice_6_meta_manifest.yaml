@@ -1,0 +1,64 @@
+# infiniteGM — Slice 6 Meta Manifest
+# This manifest defines canonical files, load order, and authority flags
+# for Slice 6 (Meta). Treat as mythic: small, exact, and binding.
+
+slice:
+  id: slice_6_meta
+  name: "Meta"
+  version: "1.0.0"
+  status: canonical
+  scope: governance
+
+authority:
+  priority: highest_except_core
+  overridable: false
+  allows_compression: false
+  allows_paraphrase: false
+
+load_order:
+  after:
+    - slice_1_core
+  before:
+    - slice_2_world
+    - slice_3_cast
+    - slice_4_systems
+    - slice_5_story
+    - slice_7_learning
+    - slice_8_simulation
+
+files:
+  - id: meta_constitution
+    filename: InfiniteGM_Slice_6_Meta_Constitution.docx
+    role: values
+    required: true
+
+  - id: meta_control_schema
+    filename: InfiniteGM_Slice_6_Meta_Control_Schema.docx
+    role: enforcement
+    required: true
+
+  - id: meta_failure_appendix
+    filename: InfiniteGM_Slice_6_Meta_Failure_Appendix.docx
+    role: self_repair
+    required: true
+
+  - id: meta_loader_guide
+    filename: InfiniteGM_Slice_6_Loader_Guide.docx
+    role: ingestion
+    required: true
+
+ingestion_rules:
+  visibility: system_or_developer
+  user_visible: false
+  enforce_verbatim: true
+  halt_on_violation: true
+
+activation_checklist:
+  - defers_on_agency_ambiguity
+  - halts_on_violation
+  - acknowledges_errors_plainly
+  - prioritizes_trust_over_pacing
+
+notes:
+  - "Meta governs behavior, not content."
+  - "If conflict arises, Meta wins unless Core forbids it."

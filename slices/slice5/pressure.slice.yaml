@@ -1,0 +1,160 @@
+# ============================================================
+# infiniteGM — Slice 6: Pressure
+# File: pressure.slice.yaml
+# Purpose: Opposition, escalation, and meaningful resistance
+# ============================================================
+
+pressure_slice:
+  id: slice_6_pressure
+  name: "Pressure"
+  role: "Opposition modeling and escalation governance"
+
+  description: >
+    Slice 6 governs adversity: antagonists, obstacles,
+    clocks, risk, and escalation. It applies pressure
+    proportionally, respects morale and survival instincts,
+    and ensures conflict advances meaning without nihilism.
+
+  authority:
+    can:
+      - introduce_opposition
+      - escalate_threats
+      - manage_clocks_and_timers
+      - enforce_morale_and_retreat
+      - apply_costs_and_tradeoffs
+    cannot:
+      - nullify_player_agency
+      - force_total_party_kill
+      - ignore_world_logic
+      - contradict_established_factions_or_motives
+      - bypass_action_economy
+
+  # ------------------------------------------------------------
+  # Principles (Adversity with Rules)
+  # ------------------------------------------------------------
+
+  principles:
+    resistance_is_informative:
+      description: >
+        Opposition teaches players about the world,
+        their enemies, and themselves.
+      enforcement:
+        - "Every obstacle reveals something."
+        - "Failure yields information, not emptiness."
+
+    survival_is_rational:
+      description: >
+        Intelligent foes value survival and retreat.
+      enforcement:
+        - "Non-fanatics retreat when outmatched."
+        - "Flight creates continuity, not cowardice."
+
+    pressure_not_punishment:
+      description: >
+        Escalation should challenge decisions, not erase them.
+      enforcement:
+        - "Costs must be avoidable or negotiable."
+        - "No surprise annihilation."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    opposition_introduction:
+      inputs:
+        - faction_state
+        - location_threat_profile
+        - player_visibility
+      outputs:
+        - adversary_presence
+        - threat_signals
+      constraints:
+        - "Foreshadow before full reveal."
+        - "Match scale to context."
+
+    escalation_management:
+      inputs:
+        - time_elapsed
+        - player_actions
+        - unresolved_clocks
+      outputs:
+        - increased_stakes
+        - narrowed_options
+      constraints:
+        - "Escalation must be traceable."
+        - "Allow off-ramps."
+
+    morale_and_retreat:
+      inputs:
+        - adversary_losses
+        - leadership_status
+        - perceived_player_power
+      outputs:
+        - withdrawal_behavior
+        - parley_attempts
+      constraints:
+        - "Narrate retreat behaviors."
+        - "Reward dominance without slaughter."
+
+    cost_application:
+      inputs:
+        - risk_taken
+        - partial_success
+        - hard_choices
+      outputs:
+        - wounds
+        - resource_loss
+        - social_fallout
+      constraints:
+        - "Costs scale with risk."
+        - "Never hide costs retroactively."
+
+  # ------------------------------------------------------------
+  # Pressure Dials
+  # ------------------------------------------------------------
+
+  dials:
+    threat_intensity:
+      options: [low, rising, high, critical]
+      default: rising
+
+    clock_visibility:
+      options: [hidden, hinted, explicit]
+      default: hinted
+
+    lethality:
+      options: [cinematic, grounded, brutal]
+      default: grounded
+
+    dial_change_rules:
+      - "Dial changes require narrative trigger."
+      - "Do not spike lethality without warning."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not escalate without cause."
+    - "Do not invalidate preparation."
+    - "Do not force irreversible loss without choice."
+    - "Do not confuse difficulty with unfairness."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "Fair Warning"
+      rule: "Players must receive signals before major danger."
+
+    - name: "Continuity of Opposition"
+      rule: "Escaped foes may reappear logically."
+
+    - name: "Agency Under Fire"
+      rule: "Players retain meaningful options under pressure."
+
+# ============================================================
+# End of Slice 6
+# ============================================================

@@ -1,0 +1,9 @@
+notes.index.v0.1:
+  intent: "Central index for note IDs referenced across modules."
+  notes:
+    - id: "note:xflags:sx.v1"
+      file: "notes/xflags/sx.v1.md"
+    - id: "note:xflags:sx.v1:key"
+      file: "notes/xflags/sx.v1.key.md"
+    - id: "note:xflags:sx.v1:examples"
+      file: "notes/xflags/sx.v1.examples.md"

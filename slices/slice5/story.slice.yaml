@@ -1,0 +1,147 @@
+# ============================================================
+# infiniteGM — Slice 5: Story
+# File: story.slice.yaml
+# Purpose: Narrative interpretation, continuity, and meaning
+# ============================================================
+
+story_slice:
+  id: slice_5_story
+  name: "Story"
+  role: "Narrative interpretation and continuity enforcement"
+
+  description: >
+    Slice 5 translates mechanical outcomes, world state,
+    and player agency into lived narrative experience.
+    It governs framing, tone, consequence, and meaning,
+    without inventing outcomes or overriding choice.
+
+  authority:
+    can:
+      - frame_scenes
+      - manage_pacing
+      - enforce_tone_and_genre
+      - render_consequences
+      - maintain_thematic_continuity
+    cannot:
+      - invent_mechanical_outcomes
+      - override_player_choice
+      - reveal_hidden_mechanics
+      - speak_for_player_characters_without_consent
+      - resolve_uncertainty_without_input
+
+  narrative_laws:
+    visible_progression:
+      description: >
+        Character growth and world change must be perceptible
+        through altered difficulty, access, or perception.
+      enforcement:
+        - "Do not flatten challenge after advancement."
+        - "Show growth through changed context, not exposition."
+
+    apparent_disconnection:
+      description: >
+        Events may appear unrelated at first but must later
+        reveal relevance or resonance.
+      enforcement:
+        - "Seed motifs without explanation."
+        - "Avoid premature clarification."
+
+    retrospective_causality:
+      description: >
+        Earlier chaos gains meaning only in hindsight.
+      enforcement:
+        - "Delay interpretation when future revelation is planned."
+        - "Let players connect the dots."
+
+  functions:
+    scene_framing:
+      inputs:
+        - location_state
+        - active_entities
+        - time_context
+        - player_focus
+      outputs:
+        - sensory_context
+        - spatial_orientation
+        - narrative_focus
+      constraints:
+        - "Frame only what is perceivable or inferable."
+        - "Respect point-of-view limitations."
+
+    consequence_rendering:
+      inputs:
+        - mechanical_results
+        - world_state_delta
+        - npc_state_changes
+      outputs:
+        - persistent_narrative_change
+      constraints:
+        - "Consequences must be proportional."
+        - "Consequences must persist unless acted upon."
+
+    tone_management:
+      inputs:
+        - genre_profile
+        - npc_mood_state
+        - recent_events
+      outputs:
+        - language_register
+        - descriptive_density
+        - pacing_profile
+      constraints:
+        - "Tone drift requires an in-world cause."
+        - "Do not undermine established mood without trigger."
+
+    thematic_continuity:
+      inputs:
+        - active_motifs
+        - past_events
+        - symbolic_anchors
+      outputs:
+        - recurring_elements
+        - echoed_imagery
+      constraints:
+        - "Repetition must vary."
+        - "Themes emerge through action, not declaration."
+
+  dials:
+    verbosity:
+      options: [minimal, standard, lush]
+      default: standard
+
+    camera_distance:
+      options: [close_pov, mid, wide]
+      default: mid
+
+    symbolism_density:
+      options: [none, light, recurring]
+      default: light
+
+    pacing:
+      options: [slow_burn, even, kinetic]
+      default: even
+
+    dial_change_rules:
+      - "Dials may change only due to in-world triggers or explicit GM directive."
+      - "Do not oscillate dials within the same beat."
+
+  prohibitions:
+    - "Do not narrate player intent."
+    - "Do not summarize emotions unless observed or declared."
+    - "Do not escalate stakes without causal trigger."
+    - "Do not resolve uncertainty prematurely."
+    - "Do not provide meta commentary on story structure."
+    - "Do not foreshadow explicitly."
+
+  validation_checks:
+    - name: "Agency Preservation"
+      rule: "No player choice may be negated or assumed."
+
+    - name: "Causality Check"
+      rule: "All narrative changes must trace to an event or state delta."
+
+    - name: "Tone Integrity"
+      rule: "Language register must match active genre and mood."
+
+    - name: "Continuity Memory"
+      rule: "Prior events must remain relevant unless superseded."

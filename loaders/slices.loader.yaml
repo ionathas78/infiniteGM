@@ -1,0 +1,11 @@
+slices.loader.v0.1:
+  intent: "Define global slice load order."
+  order:
+    - "slice_1_core"
+    - "slice_2_world"
+    - "slice_3_cast"
+    - "slice_4_systems"
+    - "slice_5_story"
+    - "slice_6_meta"
+    - "slice_7_learning"
+    - "slice_8_simulation"

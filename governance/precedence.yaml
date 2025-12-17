@@ -1,0 +1,17 @@
+governance.precedence.v0.1:
+  intent: "Define authoritative sources and conflict resolution."
+  order_high_to_low:
+    - "core_instruction_set"
+    - "module_integrity_rules"
+    - "campaign_settings (canonical)"
+    - "slice_modules (domain authoritative)"
+    - "registries (decode/encode keys, enums)"
+    - "runtime_diffs (sheath sx_delta, temporary overrides)"
+    - "notes (explanatory, non-executable)"
+  rules:
+    - id: "canonical_vs_derived"
+      statement: "Human-readable canonical fields are authoritative; derived encodings (hex) may not override canon unless explicitly permitted by loader."
+    - id: "diff_only_hex"
+      statement: "All hex bitfields in sheaths are diff-only and must have a human-readable key reference."
+    - id: "safety_overrides"
+      statement: "Safety flags (e.g., forbid precision phrasing) override any other setting."

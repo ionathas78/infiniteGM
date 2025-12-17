@@ -1,0 +1,151 @@
+# ============================================================
+# infiniteGM — Slice 7: Resolution
+# File: resolution.slice.yaml
+# Purpose: Aftermath, state change, and forward continuity
+# ============================================================
+
+resolution_slice:
+  id: slice_7_resolution
+  name: "Resolution"
+  role: "Outcome consolidation and aftermath governance"
+
+  description: >
+    Slice 7 finalizes beats after action concludes.
+    It consolidates results, applies lasting changes,
+    updates memory and state, and prepares the world
+    for what comes next—without rushing closure.
+
+  authority:
+    can:
+      - consolidate_outcomes
+      - apply_world_state_changes
+      - update_relationships_and_reputation
+      - close_clocks_or_create_new_ones
+      - signal_scene_transition
+    cannot:
+      - rewrite_prior_actions
+      - soften_consequences_after_the_fact
+      - assume_player_reflection
+      - declare_emotional_closure
+
+  # ------------------------------------------------------------
+  # Principles
+  # ------------------------------------------------------------
+
+  principles:
+    closure_is_partial:
+      description: >
+        Most resolutions answer one question and
+        open two more.
+      enforcement:
+        - "Avoid total narrative closure."
+        - "Leave threads with tension."
+
+    consequences_persist:
+      description: >
+        What changed stays changed unless acted upon.
+      enforcement:
+        - "No automatic resets."
+        - "Track scars, debts, and grudges."
+
+    meaning_emerges_late:
+      description: >
+        Understanding follows experience, not vice versa.
+      enforcement:
+        - "Do not explain themes."
+        - "Let patterns accumulate."
+
+  # ------------------------------------------------------------
+  # Core Functions
+  # ------------------------------------------------------------
+
+  functions:
+    outcome_consolidation:
+      inputs:
+        - action_results
+        - unresolved_elements
+      outputs:
+        - finalized_results
+      constraints:
+        - "Respect partial success."
+        - "Do not upgrade failure retroactively."
+
+    world_state_update:
+      inputs:
+        - finalized_results
+        - affected_entities
+      outputs:
+        - state_deltas
+      constraints:
+        - "All changes must be attributable."
+        - "Log permanence level."
+
+    relational_shift:
+      inputs:
+        - npc_interactions
+        - faction_involvement
+      outputs:
+        - trust_changes
+        - reputation_marks
+      constraints:
+        - "Small acts create small shifts."
+        - "Major acts echo widely."
+
+    scene_transition:
+      inputs:
+        - current_tension_level
+        - player_declared_next_steps
+      outputs:
+        - transition_type
+      constraints:
+        - "Do not skip recovery implicitly."
+        - "Offer a breath before the next rise."
+
+  # ------------------------------------------------------------
+  # Resolution Dials
+  # ------------------------------------------------------------
+
+  dials:
+    aftermath_focus:
+      options: [mechanical, narrative, mixed]
+      default: mixed
+
+    temporal_jump:
+      options: [none, short, extended]
+      default: none
+
+    clarity:
+      options: [ambiguous, suggestive, clear]
+      default: suggestive
+
+    dial_change_rules:
+      - "Temporal jumps require player consent or inactivity."
+      - "Clarity increases only with evidence."
+
+  # ------------------------------------------------------------
+  # Prohibitions
+  # ------------------------------------------------------------
+
+  prohibitions:
+    - "Do not narrate player takeaways."
+    - "Do not erase unresolved tension."
+    - "Do not over-explain consequences."
+    - "Do not rush to the next conflict."
+
+  # ------------------------------------------------------------
+  # Validation Heuristics
+  # ------------------------------------------------------------
+
+  validation_checks:
+    - name: "State Integrity"
+      rule: "All deltas must persist into the next scene."
+
+    - name: "Narrative Breathing Room"
+      rule: "Players are given space before escalation resumes."
+
+    - name: "Continuity Readiness"
+      rule: "The world is primed for future action."
+
+# ============================================================
+# End of Slice 7
+# ============================================================
